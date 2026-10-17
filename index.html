@@ -150,6 +150,9 @@
   }
   .opt .zh { font-size: 1.6rem; display: block; }
   .opt small { color: var(--muted); font-weight: 700; }
+  .opt .op-pt { display: block; margin-top: 2px; font-size: .85rem; font-weight: 700; color: var(--primary-dark); }
+  .opts.sem-tr .op-pt { display: none; }
+  .q-ctrl { display: flex; margin-bottom: 12px; }
   .opt.sel { border-color: var(--sel); background: var(--sel-soft); color: var(--sel); }
   .opt.certo { border-color: var(--ok); background: var(--ok-soft); color: var(--ok); }
   .opt.errado { border-color: var(--bad); background: var(--bad-soft); color: var(--bad); animation: treme .35s; }
@@ -464,15 +467,15 @@ const HISTORIAS = [{
   moral: "Não fique parado esperando a sorte cair do céu de novo. O que o camponês ganhou foi um acaso; o que ele perdeu foi o trabalho de verdade. Em português seria tipo \"esperar sentado\".",
   perguntas: [
     { h: "农民在哪里工作？", p: "Nóngmín zài nǎlǐ gōngzuò?", pt: "Onde o camponês trabalhava?",
-      ops: [["田里", "tián lǐ"], ["学校", "xuéxiào"], ["家里", "jiā lǐ"], ["咖啡店", "kāfēi diàn"]] },
+      ops: [["田里", "tián lǐ", "no campo"], ["学校", "xuéxiào", "escola"], ["家里", "jiā lǐ", "em casa"], ["咖啡店", "kāfēi diàn", "cafeteria"]] },
     { h: "田里有什么？", p: "Tián lǐ yǒu shénme?", pt: "O que havia no campo?",
-      ops: [["一棵树", "yì kē shù"], ["一只猫", "yì zhī māo"], ["一个老师", "yí ge lǎoshī"], ["很多水", "hěn duō shuǐ"]] },
+      ops: [["一棵树", "yì kē shù", "uma árvore"], ["一只猫", "yì zhī māo", "um gato"], ["一个老师", "yí ge lǎoshī", "um professor"], ["很多水", "hěn duō shuǐ", "muita água"]] },
     { h: "兔子撞到了什么？", p: "Tùzi zhuàng dào le shénme?", pt: "Em que o coelho bateu?",
-      ops: [["树", "shù"], ["农民", "nóngmín"], ["朋友", "péngyou"], ["米饭", "mǐfàn"]] },
+      ops: [["树", "shù", "árvore"], ["农民", "nóngmín", "camponês"], ["朋友", "péngyou", "amigo"], ["米饭", "mǐfàn", "arroz"]] },
     { h: "农民以后每天做什么？", p: "Nóngmín yǐhòu měitiān zuò shénme?", pt: "Depois disso, o que o camponês fazia todo dia?",
-      ops: [["等兔子", "děng tùzi"], ["工作", "gōngzuò"], ["喝茶", "hē chá"], ["跑步", "pǎobù"]] },
+      ops: [["等兔子", "děng tùzi", "esperar coelhos"], ["工作", "gōngzuò", "trabalhar"], ["喝茶", "hē chá", "tomar chá"], ["跑步", "pǎobù", "correr"]] },
     { h: "兔子再来了吗？", p: "Tùzi zài lái le ma?", pt: "O coelho voltou?",
-      ops: [["没有", "méiyǒu"], ["来了", "lái le"], ["每天来", "měitiān lái"], ["来了很多", "lái le hěn duō"]] },
+      ops: [["没有", "méiyǒu", "não"], ["来了", "lái le", "veio"], ["每天来", "měitiān lái", "vem todo dia"], ["来了很多", "lái le hěn duō", "vieram muitos"]] },
     { h: "这个故事想说什么？", p: "Zhège gùshi xiǎng shuō shénme?", pt: "O que essa história quer dizer?",
       ops: [["Não espere a sorte, faça sua parte"], ["Coelhos são perigosos"], ["Árvores trazem sorte"], ["Trabalhar é perda de tempo"]] }
   ]
@@ -480,7 +483,7 @@ const HISTORIAS = [{
 
 /* ================== ESTADO SALVO ================== */
 const CHAVE = "baoChines";
-let state = { xp: 0, streak: 0, ultimoDia: null, licoes: {}, mic: true };
+let state = { xp: 0, streak: 0, ultimoDia: null, licoes: {}, mic: true, trOps: true };
 try { Object.assign(state, JSON.parse(localStorage.getItem(CHAVE)) || {}); } catch (e) {}
 function salvar() { try { localStorage.setItem(CHAVE, JSON.stringify(state)); } catch (e) {} }
 
@@ -701,8 +704,13 @@ function renderExercicio() {
         <div class="bubble"><button class="spk" data-fala>🔊</button>
           <div><div class="zh big-q">${q.h}</div><div class="py">${q.p}</div>
           <button class="ver-tr">ver tradução</button><div class="q-tr hidden">${q.pt}</div></div></div></div>
-      <div class="opts ${comPy ? "duas" : ""}">${ops.map((o, i) => `<button class="opt" data-i="${i}">${comPy ? `<span class="zh">${o.h}</span><small>${o.p}</small>` : o.h}</button>`).join("")}</div>`;
+      <div class="q-ctrl"><label class="chip"><input type="checkbox" id="qTr" ${state.trOps ? "checked" : ""}> Tradução nas respostas</label></div>
+      <div class="opts ${comPy ? "duas" : ""} ${state.trOps ? "" : "sem-tr"}">${ops.map((o, i) => `<button class="opt" data-i="${i}">${comPy ? `<span class="zh">${o.h}</span><small>${o.p}</small>${o.pt ? `<span class="op-pt">${o.pt}</span>` : ""}` : o.h}</button>`).join("")}</div>`;
     ex.opcoes = ops;
+    area.querySelector("#qTr").onchange = e => {
+      state.trOps = e.target.checked; salvar();
+      area.querySelector(".opts").classList.toggle("sem-tr", !state.trOps);
+    };
     area.querySelector(".ver-tr").onclick = e => { e.target.classList.add("hidden"); area.querySelector(".q-tr").classList.remove("hidden"); };
     falar(q.h);
   }
@@ -928,7 +936,7 @@ function abrirHistoria(h) {
 function iniciarDesafio(h) {
   speechSynthesis.cancel();
   iniciarLicaoComFila(h.perguntas.map(q => {
-    const ops = q.ops.map(o => ({ h: o[0], p: o[1] || "" }));
+    const ops = q.ops.map(o => ({ h: o[0], p: o[1] || "", pt: o[2] || "" }));
     return { tipo: "pergunta", q, item: ops[0], opcoesBase: ops };
   }));
   historiaAtual = h.id;
