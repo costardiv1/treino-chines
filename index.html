@@ -9,41 +9,35 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #FFF8F0;
+    color-scheme: light;
+    --bg: #EAF7F0;          /* verde menta pastel */
+    --bg2: #FDEEF3;         /* rosa pastel */
     --card: #FFFFFF;
-    --ink: #2D2420;
-    --muted: #9A8C82;
-    --border: #EFE3D6;
-    --primary: #E23D3D;
-    --primary-dark: #B32626;
+    --ink: #24413A;
+    --muted: #7A938A;
+    --border: #CFE8DB;
+    --primary: #F06A8F;     /* rosa coral */
+    --primary-dark: #CF4C72;
+    --pink-soft: #FFE3EC;
     --gold: #F5B700;
-    --gold-dark: #C99300;
-    --blue: #3B82F6;
-    --blue-soft: #E5EFFE;
+    --gold-dark: #C08C00;
+    --blue: #2BB3A3;        /* verde-água para o áudio */
+    --blue-dark: #1E8E81;
+    --sel: #8A7CF0;         /* lavanda para seleção */
+    --sel-soft: #EEEBFF;
     --ok: #22A861;
     --ok-dark: #17834A;
-    --ok-soft: #DDF5E7;
+    --ok-soft: #D3F3E0;
     --bad: #E0344A;
     --bad-dark: #B0203A;
-    --bad-soft: #FDE3E7;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #17120F;
-      --card: #231C18;
-      --ink: #F6EEE7;
-      --muted: #A89A90;
-      --border: #3A2F28;
-      --blue-soft: #1C2A44;
-      --ok-soft: #173525;
-      --bad-soft: #3D1A21;
-    }
+    --bad-soft: #FDE1E6;
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin: 0; height: 100%; }
   body {
     font-family: "Nunito", system-ui, sans-serif;
-    background: var(--bg); color: var(--ink);
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%) fixed;
+    color: var(--ink);
   }
   .zh { font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif; }
   .hidden { display: none !important; }
@@ -79,7 +73,7 @@
 
   .hero {
     display: flex; align-items: center; gap: 14px; margin: 8px 0 22px;
-    background: var(--card); border: 2px solid var(--border); border-radius: 22px; padding: 16px;
+    background: var(--pink-soft); border: 2px solid #FBCBDA; border-radius: 22px; padding: 16px;
   }
   .mascote { font-size: 3.4rem; line-height: 1; animation: balanca 3s ease-in-out infinite; }
   @keyframes balanca { 50% { transform: rotate(-8deg) translateY(-3px); } }
@@ -139,12 +133,12 @@
   .spk {
     font: inherit; cursor: pointer; border: none; border-radius: 14px; flex: none;
     width: 46px; height: 46px; font-size: 1.3rem;
-    background: var(--blue); color: #fff; box-shadow: 0 4px 0 #2563EB;
+    background: var(--blue); color: #fff; box-shadow: 0 4px 0 var(--blue-dark);
   }
   .spk:active { transform: translateY(4px); box-shadow: none; }
   .spk.lento { background: var(--card); color: var(--blue); border: 2px solid var(--border); box-shadow: 0 4px 0 var(--border); }
   .ouvir-box { display: flex; justify-content: center; gap: 16px; margin: 10px 0 30px; }
-  .ouvir-box .spk { width: 96px; height: 96px; font-size: 2.6rem; border-radius: 24px; box-shadow: 0 6px 0 #2563EB; }
+  .ouvir-box .spk { width: 96px; height: 96px; font-size: 2.6rem; border-radius: 24px; box-shadow: 0 6px 0 var(--blue-dark); }
   .ouvir-box .spk.lento { width: 72px; height: 72px; font-size: 1.8rem; align-self: flex-end; box-shadow: 0 5px 0 var(--border); }
 
   .opts { display: grid; gap: 12px; }
@@ -156,7 +150,7 @@
   }
   .opt .zh { font-size: 1.6rem; display: block; }
   .opt small { color: var(--muted); font-weight: 700; }
-  .opt.sel { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); }
+  .opt.sel { border-color: var(--sel); background: var(--sel-soft); color: var(--sel); }
   .opt.certo { border-color: var(--ok); background: var(--ok-soft); color: var(--ok); }
   .opt.errado { border-color: var(--bad); background: var(--bad-soft); color: var(--bad); animation: treme .35s; }
   .opt.feito { opacity: .35; pointer-events: none; }
@@ -164,8 +158,12 @@
 
   .pares { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .pares .col { display: grid; gap: 12px; align-content: start; }
-  .pares .opt { padding: 12px 8px; font-size: 1rem; }
-  .pares .opt .zh { font-size: 1.45rem; }
+  .pares .opt {
+    height: 72px; min-height: 0; padding: 6px 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .98rem; line-height: 1.15;
+  }
+  .pares .opt .zh { font-size: 1.4rem; line-height: 1.1; }
 
   .mic-area { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 10px; }
   .mic {
@@ -175,14 +173,15 @@
   }
   .mic:active { transform: translateY(5px); box-shadow: none; }
   .mic.ouvindo { animation: pulsa 1s infinite; }
-  @keyframes pulsa { 0%,100% { box-shadow: 0 6px 0 var(--primary-dark), 0 0 0 0 rgba(226,61,61,.5); } 50% { box-shadow: 0 6px 0 var(--primary-dark), 0 0 0 18px rgba(226,61,61,0); } }
+  @keyframes pulsa { 0%,100% { box-shadow: 0 6px 0 var(--primary-dark), 0 0 0 0 rgba(240,106,143,.5); } 50% { box-shadow: 0 6px 0 var(--primary-dark), 0 0 0 18px rgba(240,106,143,0); } }
   .mic-dica { color: var(--muted); font-weight: 800; }
   .mic-res { font-weight: 800; text-align: center; min-height: 24px; }
   .mic-res.bad { color: var(--bad); }
 
   #rodape {
     position: fixed; left: 0; right: 0; bottom: 0; padding: 16px;
-    border-top: 2px solid var(--border); background: var(--bg);
+    border-top: 2px solid var(--border); background: rgba(255,255,255,.88);
+    backdrop-filter: blur(6px);
     display: flex; gap: 12px; justify-content: center;
   }
   #rodape .btn { flex: 1; max-width: 528px; }
@@ -212,6 +211,72 @@
   .fim-box .btn { width: 100%; }
 
   .aviso { color: var(--muted); font-size: .85rem; font-weight: 700; text-align: center; margin-top: 24px; }
+
+  /* Histórias */
+  .h-top-titulo { font-weight: 900; font-size: 1.1rem; }
+  .h-card .u-emoji { background: var(--pink-soft); }
+  .h-capa {
+    display: flex; gap: 14px; align-items: center; background: var(--card);
+    border: 2px solid var(--border); border-radius: 22px; padding: 16px; margin-bottom: 14px;
+  }
+  .h-emoji { font-size: 3rem; }
+  .h-zh { font-size: 1.9rem; font-weight: 700; color: var(--primary); line-height: 1.2; }
+  .h-pt { font-weight: 900; font-size: 1.1rem; }
+  .h-epoca { color: var(--muted); font-size: .85rem; font-weight: 700; margin-top: 2px; }
+  .h-contexto {
+    background: var(--pink-soft); border: 2px solid #FBCBDA; border-radius: 16px;
+    padding: 14px; font-weight: 700; line-height: 1.5; font-size: .95rem; margin-bottom: 14px;
+  }
+  .h-ctrl { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .chip {
+    background: var(--card); border: 2px solid var(--border); border-radius: 99px;
+    padding: 8px 14px; font-weight: 800; display: flex; gap: 6px; align-items: center; cursor: pointer;
+  }
+  .chip input { accent-color: var(--primary); }
+  .btn.small { padding: 10px 16px; font-size: .85rem; margin-left: auto; }
+  .h-dica { color: var(--muted); font-weight: 700; font-size: .88rem; margin: 10px 2px 12px; }
+  .h-frase {
+    display: flex; gap: 10px; align-items: flex-start; background: var(--card);
+    border: 2px solid var(--border); border-radius: 18px; padding: 12px; margin-bottom: 10px;
+    transition: border-color .2s, background .2s;
+  }
+  .h-frase.tocando { border-color: var(--blue); background: #E3F6F2; }
+  .spk.sm { width: 38px; height: 38px; font-size: 1rem; border-radius: 12px; box-shadow: 0 3px 0 var(--blue-dark); margin-top: 6px; }
+  .h-corpo { flex: 1; min-width: 0; }
+  .h-linha { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 2px; }
+  .palavra {
+    font: inherit; background: none; border: none; padding: 3px 3px; border-radius: 8px;
+    cursor: pointer; color: var(--ink);
+  }
+  .palavra:hover, .palavra.ativa { background: var(--sel-soft); color: var(--sel); }
+  .palavra ruby { font-size: 1.45rem; ruby-position: over; }
+  .palavra rt { font-family: "Nunito", sans-serif; font-size: .68rem; color: var(--muted); font-weight: 800; padding-bottom: 2px; }
+  .sem-py rt { visibility: hidden; }
+  .pont { font-size: 1.45rem; padding: 3px 0; }
+  .h-trad { display: none; color: var(--muted); font-weight: 700; margin-top: 8px; font-size: .95rem; }
+  .com-tr .h-trad { display: block; }
+  .h-moral {
+    background: var(--ok-soft); color: var(--ok-dark); border-radius: 16px; padding: 14px;
+    font-weight: 700; margin: 16px 0; line-height: 1.5;
+  }
+  .btn.full { width: 100%; }
+  .word-info {
+    position: fixed; left: 12px; right: 12px; bottom: 16px; max-width: 536px; margin: 0 auto;
+    background: var(--card); border: 2px solid var(--sel); border-radius: 18px; padding: 12px 14px;
+    display: flex; gap: 14px; align-items: center; box-shadow: 0 8px 24px rgba(36,65,58,.18);
+    transform: translateY(160%); transition: transform .2s; z-index: 6;
+  }
+  .word-info.show { transform: none; }
+  .wi-h { font-size: 2rem; font-weight: 700; color: var(--sel); }
+  .wi-p { font-weight: 900; color: var(--primary); }
+  .wi-m { font-weight: 800; }
+  .wi-x { margin-left: auto; }
+  .ver-tr {
+    font: inherit; background: none; border: none; color: var(--sel); font-weight: 800;
+    cursor: pointer; padding: 4px 0 0; font-size: .9rem;
+  }
+  .q-tr { color: var(--muted); font-weight: 700; margin-top: 4px; }
+  .big-q { font-size: 1.6rem; font-weight: 700; line-height: 1.3; }
 </style>
 </head>
 <body>
@@ -235,6 +300,9 @@
 
     <h2>Unidades</h2>
     <div id="unidades"></div>
+
+    <h2>Histórias da China</h2>
+    <div id="historias"></div>
 
     <h2>Treino livre</h2>
     <div class="livre">
@@ -265,6 +333,16 @@
         <button id="btnContinuar" class="btn">Continuar</button>
       </div>
     </div>
+  </section>
+
+  <!-- HISTÓRIA -->
+  <section id="historia" class="screen hidden">
+    <div class="lesson-top">
+      <button id="btnVoltarH" class="icon" title="Voltar">←</button>
+      <div class="h-top-titulo">📜 História</div>
+    </div>
+    <div id="hConteudo"></div>
+    <div id="wordInfo" class="word-info"></div>
   </section>
 
   <!-- FIM -->
@@ -336,6 +414,70 @@ const UNIDADES = [
 const VOCAB = UNIDADES.flatMap(u => u.itens);
 const LICOES_POR_UNIDADE = 5;
 
+/* ================== HISTÓRIAS ================== */
+// Cada palavra: [hanzi, pinyin, significado]. Texto solto = pontuação.
+const HISTORIAS = [{
+  id: "coelho",
+  emoji: "🐇",
+  titulo: "守株待兔",
+  py: "shǒu zhū dài tù",
+  pt: "O camponês e o coelho",
+  epoca: "Reino de Song · Período dos Reinos Combatentes (séc. III a.C.)",
+  contexto: "Essa fábula está no livro do filósofo Han Feizi, escrito há mais de 2.200 anos. Ele contou a história para criticar quem fica preso ao passado, esperando que a sorte se repita. Hoje, 守株待兔 é um chengyu: uma expressão de quatro caracteres que todo chinês conhece. Aqui ela foi recontada em chinês simples, pra iniciantes.",
+  frases: [
+    { pt: "Há muito tempo, no reino de Song, havia um camponês.", t: [
+      ["很久", "hěn jiǔ", "muito tempo"], ["以前", "yǐqián", "atrás / antes"], "，",
+      ["宋国", "Sòngguó", "reino de Song"], ["有", "yǒu", "ter / haver"],
+      ["一个", "yí ge", "um (classificador geral)"], ["农民", "nóngmín", "camponês"], "。"] },
+    { pt: "Todos os dias ele trabalhava no campo.", t: [
+      ["他", "tā", "ele"], ["每天", "měitiān", "todo dia"], ["在", "zài", "em / no"],
+      ["田里", "tián lǐ", "no campo (田 = campo plantado)"], ["工作", "gōngzuò", "trabalhar"], "。"] },
+    { pt: "No campo havia uma árvore.", t: [
+      ["田里", "tián lǐ", "no campo"], ["有", "yǒu", "havia"],
+      ["一棵", "yì kē", "uma (classificador de árvores)"], ["树", "shù", "árvore"], "。"] },
+    { pt: "Um dia, um coelho veio correndo muito rápido.", t: [
+      ["有一天", "yǒu yì tiān", "um dia"], "，", ["一只", "yì zhī", "um (classificador de animais)"],
+      ["兔子", "tùzi", "coelho"], ["跑得", "pǎo de", "corria (de um jeito...)"], ["很快", "hěn kuài", "muito rápido"], "。"] },
+    { pt: "O coelho bateu na árvore e morreu.", t: [
+      ["兔子", "tùzi", "coelho"], ["撞到了", "zhuàng dào le", "bateu em"], ["树", "shù", "árvore"], "，",
+      ["死了", "sǐ le", "morreu"], "。"] },
+    { pt: "O camponês ficou muito feliz e pensou: \"Que ótimo!\"", t: [
+      ["农民", "nóngmín", "camponês"], ["很", "hěn", "muito"], ["高兴", "gāoxìng", "feliz"], "，",
+      ["他", "tā", "ele"], ["想", "xiǎng", "pensar"], "：“", ["太好了", "tài hǎo le", "que ótimo!"], "！”"] },
+    { pt: "Ele pensou: \"Não vou mais trabalhar, vou esperar coelhos todo dia.\"", t: [
+      ["他", "tā", "ele"], ["想", "xiǎng", "pensou"], "：“", ["我", "wǒ", "eu"], ["不", "bù", "não"],
+      ["工作", "gōngzuò", "trabalhar"], ["了", "le", "(indica mudança: \"não mais\")"], "，",
+      ["我", "wǒ", "eu"], ["每天", "měitiān", "todo dia"], ["等", "děng", "esperar"], ["兔子", "tùzi", "coelho"], "。”"] },
+    { pt: "Todo dia ele sentava debaixo da árvore e esperava.", t: [
+      ["他", "tā", "ele"], ["每天", "měitiān", "todo dia"], ["坐在", "zuò zài", "sentar em"],
+      ["树下", "shù xià", "debaixo da árvore"], ["等", "děng", "esperar"], "。"] },
+    { pt: "Mas nenhum coelho apareceu de novo.", t: [
+      ["可是", "kěshì", "mas / porém"], "，", ["兔子", "tùzi", "coelho"], ["没有", "méiyǒu", "não (no passado)"],
+      ["再", "zài", "de novo (som igual a 在!)"], ["来", "lái", "vir"], "。"] },
+    { pt: "No campo dele não sobrou nada.", t: [
+      ["他的", "tā de", "dele (的 = de, posse)"], ["田里", "tián lǐ", "no campo"],
+      ["什么都", "shénme dōu", "nada / coisa nenhuma (com negação)"], ["没有了", "méiyǒu le", "não tinha mais"], "。"] },
+    { pt: "Isso é o \"守株待兔\": esperar o coelho ao lado do toco.", t: [
+      ["这", "zhè", "isso / este"], ["就是", "jiù shì", "é justamente"], "“",
+      ["守株待兔", "shǒu zhū dài tù", "守 vigiar · 株 toco de árvore · 待 esperar · 兔 coelho"], "”。"] }
+  ],
+  moral: "Não fique parado esperando a sorte cair do céu de novo. O que o camponês ganhou foi um acaso; o que ele perdeu foi o trabalho de verdade. Em português seria tipo \"esperar sentado\".",
+  perguntas: [
+    { h: "农民在哪里工作？", p: "Nóngmín zài nǎlǐ gōngzuò?", pt: "Onde o camponês trabalhava?",
+      ops: [["田里", "tián lǐ"], ["学校", "xuéxiào"], ["家里", "jiā lǐ"], ["咖啡店", "kāfēi diàn"]] },
+    { h: "田里有什么？", p: "Tián lǐ yǒu shénme?", pt: "O que havia no campo?",
+      ops: [["一棵树", "yì kē shù"], ["一只猫", "yì zhī māo"], ["一个老师", "yí ge lǎoshī"], ["很多水", "hěn duō shuǐ"]] },
+    { h: "兔子撞到了什么？", p: "Tùzi zhuàng dào le shénme?", pt: "Em que o coelho bateu?",
+      ops: [["树", "shù"], ["农民", "nóngmín"], ["朋友", "péngyou"], ["米饭", "mǐfàn"]] },
+    { h: "农民以后每天做什么？", p: "Nóngmín yǐhòu měitiān zuò shénme?", pt: "Depois disso, o que o camponês fazia todo dia?",
+      ops: [["等兔子", "děng tùzi"], ["工作", "gōngzuò"], ["喝茶", "hē chá"], ["跑步", "pǎobù"]] },
+    { h: "兔子再来了吗？", p: "Tùzi zài lái le ma?", pt: "O coelho voltou?",
+      ops: [["没有", "méiyǒu"], ["来了", "lái le"], ["每天来", "měitiān lái"], ["来了很多", "lái le hěn duō"]] },
+    { h: "这个故事想说什么？", p: "Zhège gùshi xiǎng shuō shénme?", pt: "O que essa história quer dizer?",
+      ops: [["Não espere a sorte, faça sua parte"], ["Coelhos são perigosos"], ["Árvores trazem sorte"], ["Trabalhar é perda de tempo"]] }
+  ]
+}];
+
 /* ================== ESTADO SALVO ================== */
 const CHAVE = "baoChines";
 let state = { xp: 0, streak: 0, ultimoDia: null, licoes: {}, mic: true };
@@ -362,7 +504,7 @@ function atualizarStreak() {
 const $ = id => document.getElementById(id);
 const embaralhar = arr => { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const semTom = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, "").toLowerCase();
-function mostrarTela(id) { ["home", "licao", "fim"].forEach(t => $(t).classList.toggle("hidden", t !== id)); window.scrollTo(0, 0); }
+function mostrarTela(id) { ["home", "licao", "fim", "historia"].forEach(t => $(t).classList.toggle("hidden", t !== id)); $("wordInfo").classList.remove("show"); window.scrollTo(0, 0); }
 
 /* ================== ÁUDIO ================== */
 let vozZh = null;
@@ -448,10 +590,20 @@ function renderHome() {
         <div class="u-bar"><div style="width:${pct}%"></div></div>
       </div>${coroa}</button>`;
   }).join("");
-  document.querySelectorAll(".unidade").forEach(b => b.onclick = () => {
+  document.querySelectorAll(".unidade[data-u]").forEach(b => b.onclick = () => {
     const u = UNIDADES.find(x => x.id === b.dataset.u);
     iniciarLicao(u.itens, "misto", u.id);
   });
+
+  const feitasH = state.historias || {};
+  $("historias").innerHTML = HISTORIAS.map(h => `<button class="unidade h-card" data-h="${h.id}">
+      <div class="u-emoji">${h.emoji}</div>
+      <div class="u-info">
+        <div class="u-nome"><span class="zh">${h.titulo}</span> · ${h.pt}</div>
+        <div class="u-sub" style="margin-bottom:0">${h.frases.length} frases · desafio de ${h.perguntas.length} perguntas</div>
+      </div>${feitasH[h.id] ? '<span class="u-coroa">✅</span>' : ""}</button>`).join("");
+  document.querySelectorAll(".unidade[data-h]").forEach(b => b.onclick = () =>
+    abrirHistoria(HISTORIAS.find(x => x.id === b.dataset.h)));
 }
 $("btnMic").onclick = () => {
   if (!SR) { alert("Seu navegador não tem reconhecimento de voz. Use o Google Chrome."); return; }
@@ -466,10 +618,10 @@ document.querySelectorAll(".tile").forEach(t => t.onclick = () => {
 
 /* ================== LIÇÃO ================== */
 let fila = [], totalInicial = 0, feitos = 0, xpLicao = 0, acertosPrimeira = 0, unidadeAtual = null, poolAtual = [];
-let resultadoAtual = null, selecionado = null;
+let resultadoAtual = null, selecionado = null, historiaAtual = null;
 
 function iniciarLicao(itens, modo, unidadeId = null) {
-  unidadeAtual = unidadeId; poolAtual = itens;
+  unidadeAtual = unidadeId; poolAtual = itens; historiaAtual = null;
   fila = [];
   if (modo === "pares") {
     for (let i = 0; i < 3; i++) fila.push({ tipo: "pares", itens: embaralhar(itens).slice(0, 5) });
@@ -540,6 +692,20 @@ function renderExercicio() {
   else if (ex.tipo === "pares") {
     renderPares(ex);
   }
+  else if (ex.tipo === "pergunta") {
+    const q = ex.q;
+    const ops = embaralhar(ex.opcoesBase);
+    const comPy = ops.every(o => o.p);
+    area.innerHTML = `<div class="instr">Desafio da história</div>
+      <div class="prompt"><div class="mini">🐼</div>
+        <div class="bubble"><button class="spk" data-fala>🔊</button>
+          <div><div class="zh big-q">${q.h}</div><div class="py">${q.p}</div>
+          <button class="ver-tr">ver tradução</button><div class="q-tr hidden">${q.pt}</div></div></div></div>
+      <div class="opts ${comPy ? "duas" : ""}">${ops.map((o, i) => `<button class="opt" data-i="${i}">${comPy ? `<span class="zh">${o.h}</span><small>${o.p}</small>` : o.h}</button>`).join("")}</div>`;
+    ex.opcoes = ops;
+    area.querySelector(".ver-tr").onclick = e => { e.target.classList.add("hidden"); area.querySelector(".q-tr").classList.remove("hidden"); };
+    falar(q.h);
+  }
   else if (ex.tipo === "falar") {
     area.innerHTML = `<div class="instr">Fale em voz alta</div>
       <div class="prompt"><div class="mini">🐼</div>
@@ -557,8 +723,9 @@ function renderExercicio() {
   }
 
   // eventos comuns
-  area.querySelectorAll("[data-fala]").forEach(b => b.onclick = () => falar(it.h));
-  area.querySelectorAll("[data-fala-lento]").forEach(b => b.onclick = () => falar(it.h, true));
+  const textoFala = ex.tipo === "pergunta" ? ex.q.h : (it ? it.h : "");
+  area.querySelectorAll("[data-fala]").forEach(b => b.onclick = () => falar(textoFala));
+  area.querySelectorAll("[data-fala-lento]").forEach(b => b.onclick = () => falar(textoFala, true));
   if (ex.opcoes) {
     area.querySelectorAll(".opt").forEach(b => b.onclick = () => {
       if (resultadoAtual) return;
@@ -566,7 +733,7 @@ function renderExercicio() {
       b.classList.add("sel");
       selecionado = +b.dataset.i;
       $("btnCheck").disabled = false;
-      if (ex.tipo === "reverso" || ex.tipo === "ouvir") falar(ex.opcoes[selecionado].h);
+      if (ex.tipo === "reverso" || ex.tipo === "ouvir" || (ex.tipo === "pergunta" && ex.opcoes[selecionado].p)) falar(ex.opcoes[selecionado].h);
     });
   }
 }
@@ -631,7 +798,9 @@ function verificar() {
   resultadoAtual = { ok };
   if (ok && !ex.errou) { xpLicao += 10; acertosPrimeira++; }
   if (!ok) ex.errou = true;
-  const resposta = `<span class="zh">${ex.item.h}</span> (${ex.item.p}) = ${ex.item.pt}`;
+  const resposta = ex.tipo === "pergunta"
+    ? (ex.item.p ? `<span class="zh">${ex.item.h}</span> (${ex.item.p})` : ex.item.h) + `<br><small>${ex.q.pt}</small>`
+    : `<span class="zh">${ex.item.h}</span> (${ex.item.p}) = ${ex.item.pt}`;
   const elogios = ["Mandou bem!", "Isso aí!", "Arrasou!", "很好! Muito bom!", "Perfeito!"];
   mostrarFeedback(ok, ok ? elogios[Math.floor(Math.random() * elogios.length)] : "Resposta certa:", resposta);
 }
@@ -684,6 +853,7 @@ function terminar() {
   state.xp += xpLicao;
   atualizarStreak();
   if (unidadeAtual) state.licoes[unidadeAtual] = (state.licoes[unidadeAtual] || 0) + 1;
+  if (historiaAtual) { state.historias = state.historias || {}; state.historias[historiaAtual] = true; }
   salvar();
   $("fimXp").textContent = "+" + xpLicao;
   $("fimAc").textContent = Math.round(acertosPrimeira / totalInicial * 100) + "%";
@@ -691,6 +861,96 @@ function terminar() {
   mostrarTela("fim");
   som(true); setTimeout(() => som(true), 220);
 }
+
+/* ================== TELA DE HISTÓRIA ================== */
+function falarSequencia(textos, aoMudar) {
+  if (!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  textos.forEach((t, i) => {
+    const u = new SpeechSynthesisUtterance(t);
+    u.lang = "zh-CN"; u.rate = 0.8;
+    if (vozZh) u.voice = vozZh;
+    u.onstart = () => aoMudar(i);
+    if (i === textos.length - 1) u.onend = () => aoMudar(-1);
+    speechSynthesis.speak(u);
+  });
+}
+
+function abrirHistoria(h) {
+  const textoFrase = f => f.t.map(tk => typeof tk === "string" ? tk : tk[0]).join("");
+  $("hConteudo").innerHTML = `
+    <div class="h-capa"><div class="h-emoji">${h.emoji}</div>
+      <div><div class="zh h-zh">${h.titulo}</div><div class="py">${h.py}</div>
+      <div class="h-pt">${h.pt}</div><div class="h-epoca">${h.epoca}</div></div></div>
+    <div class="h-contexto">${h.contexto}</div>
+    <div class="h-ctrl">
+      <label class="chip"><input type="checkbox" id="hPy" checked> Pinyin</label>
+      <label class="chip"><input type="checkbox" id="hTr"> Tradução</label>
+      <button class="btn small" id="hTudo">▶ Ouvir tudo</button>
+    </div>
+    <p class="h-dica">Tente ler sozinho primeiro. Toque em qualquer palavra para ouvir e ver o significado.</p>
+    <div id="hFrases">${h.frases.map((f, i) => `<div class="h-frase" data-i="${i}">
+      <button class="spk sm" data-f="${i}">🔊</button>
+      <div class="h-corpo"><div class="h-linha">${f.t.map((tk, j) => typeof tk === "string"
+        ? `<span class="pont zh">${tk}</span>`
+        : `<button class="palavra" data-f="${i}" data-j="${j}"><ruby class="zh">${tk[0]}<rt>${tk[1]}</rt></ruby></button>`).join("")}</div>
+      <div class="h-trad">${f.pt}</div></div></div>`).join("")}</div>
+    <div class="h-moral"><b>Moral da história:</b> ${h.moral}</div>
+    <button class="btn full" id="hDesafio">🏆 Fazer o desafio</button>`;
+
+  const box = $("hFrases");
+  $("hPy").onchange = e => box.classList.toggle("sem-py", !e.target.checked);
+  $("hTr").onchange = e => box.classList.toggle("com-tr", e.target.checked);
+
+  const marcar = i => box.querySelectorAll(".h-frase").forEach((el, k) => el.classList.toggle("tocando", k === i));
+  $("hTudo").onclick = () => falarSequencia(h.frases.map(textoFrase), marcar);
+  box.querySelectorAll("[data-f].spk").forEach(b => b.onclick = () => {
+    const i = +b.dataset.f; falarSequencia([textoFrase(h.frases[i])], k => marcar(k === -1 ? -1 : i));
+  });
+
+  const info = $("wordInfo");
+  box.querySelectorAll(".palavra").forEach(b => b.onclick = ev => {
+    ev.stopPropagation();
+    const [hz, py, sig] = h.frases[+b.dataset.f].t[+b.dataset.j];
+    box.querySelectorAll(".palavra.ativa").forEach(x => x.classList.remove("ativa"));
+    b.classList.add("ativa");
+    falar(hz, true);
+    info.innerHTML = `<div class="zh wi-h">${hz}</div><div><div class="wi-p">${py}</div><div class="wi-m">${sig}</div></div>
+      <button class="icon wi-x" title="Fechar">✕</button>`;
+    info.classList.add("show");
+    info.querySelector(".wi-x").onclick = () => { info.classList.remove("show"); b.classList.remove("ativa"); };
+  });
+
+  $("hDesafio").onclick = () => iniciarDesafio(h);
+  mostrarTela("historia");
+}
+
+function iniciarDesafio(h) {
+  speechSynthesis.cancel();
+  iniciarLicaoComFila(h.perguntas.map(q => {
+    const ops = q.ops.map(o => ({ h: o[0], p: o[1] || "" }));
+    return { tipo: "pergunta", q, item: ops[0], opcoesBase: ops };
+  }));
+  historiaAtual = h.id;
+}
+
+function iniciarLicaoComFila(novaFila) {
+  unidadeAtual = null; poolAtual = VOCAB; historiaAtual = null;
+  fila = novaFila;
+  totalInicial = fila.length; feitos = 0; xpLicao = 0; acertosPrimeira = 0;
+  atualizarBarra();
+  mostrarTela("licao");
+  renderExercicio();
+}
+
+$("btnVoltarH").onclick = () => { speechSynthesis.cancel(); renderHome(); mostrarTela("home"); };
+document.addEventListener("click", e => {
+  const info = $("wordInfo");
+  if (info.classList.contains("show") && !info.contains(e.target)) {
+    info.classList.remove("show");
+    document.querySelectorAll(".palavra.ativa").forEach(x => x.classList.remove("ativa"));
+  }
+});
 
 $("btnCheck").onclick = verificar;
 $("btnContinuar").onclick = continuar;
