@@ -6,7 +6,7 @@
 <title>Bao Chinês</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Noto+Sans+SC:wght@500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light;
@@ -65,45 +65,69 @@
   /* Topo da home */
   .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
   .brand { font-weight: 900; font-size: 1.35rem; }
-  .brand span { color: var(--primary); }
+  .brand span { color: var(--primary); font-family: "Ma Shan Zheng", "Noto Sans SC", serif; font-weight: 400; font-size: 1.6rem; margin-left: 2px; }
+  .cali { font-family: "Ma Shan Zheng", "Noto Sans SC", serif; font-weight: 400 !important; }
   .stats { display: flex; align-items: center; gap: 12px; font-weight: 900; }
   .stats .st { color: #F97316; }
   .stats .xp { color: var(--gold-dark); }
   .mic-off { opacity: .35; }
 
+  /* Cena do topo: montanhas, pagode e lanternas */
   .hero {
-    display: flex; align-items: center; gap: 14px; margin: 8px 0 22px;
-    background: var(--pink-soft); border: 2px solid #FBCBDA; border-radius: 22px; padding: 16px;
+    position: relative; overflow: hidden; min-height: 178px; margin: 8px 0 22px;
+    background: linear-gradient(180deg, #FFF6EC 0%, var(--pink-soft) 100%);
+    border: 2px solid #FBCBDA; border-radius: 22px; padding: 14px;
   }
+  .hero-cena { position: absolute; inset: 0; }
+  .hero-cena svg { width: 100%; height: 100%; display: block; }
+  .hero-conteudo { position: relative; display: flex; align-items: flex-start; gap: 10px; max-width: 80%; }
   .mascote { font-size: 3.4rem; line-height: 1; animation: balanca 3s ease-in-out infinite; }
   @keyframes balanca { 50% { transform: rotate(-8deg) translateY(-3px); } }
-  .balao { font-weight: 800; font-size: 1.05rem; line-height: 1.45; }
+  .balao {
+    background: rgba(255,255,255,.9); border-radius: 16px; padding: 10px 12px;
+    font-weight: 800; font-size: 1rem; line-height: 1.4; box-shadow: 0 3px 0 rgba(0,0,0,.05);
+  }
   .balao .zh { color: var(--primary); font-size: 1.15rem; }
 
-  h2 { font-size: 1.1rem; font-weight: 900; margin: 22px 4px 12px; }
+  h2 { font-size: 1.1rem; font-weight: 900; margin: 24px 4px 12px; display: flex; align-items: center; gap: 8px; }
+  /* Carimbo vermelho (印章) com hanzi */
+  .selo {
+    background: #E25563; color: #fff; font-family: "Ma Shan Zheng", "Noto Sans SC", serif; font-weight: 400;
+    font-size: 1.05rem; line-height: 1; padding: 5px 6px 3px; border-radius: 6px; letter-spacing: 1px;
+  }
 
-  /* Unidades */
-  .unidade {
-    width: 100%; display: flex; align-items: center; gap: 14px; text-align: left;
+  /* Blocos da home (unidades e histórias) */
+  .blocos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .blocos > .bloco:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .blocos.uma { grid-template-columns: 1fr; }
+  .bloco {
+    position: relative; display: flex; flex-direction: column; text-align: left; padding: 0; overflow: hidden;
     font: inherit; color: inherit; cursor: pointer;
-    background: var(--card); border: 2px solid var(--border); border-bottom-width: 5px;
-    border-radius: 20px; padding: 14px 16px; margin-bottom: 12px;
+    background: var(--card); border: 2px solid var(--border); border-bottom-width: 5px; border-radius: 22px;
   }
-  .unidade:active { transform: translateY(3px); border-bottom-width: 2px; margin-top: 3px; }
-  .u-emoji {
-    width: 56px; height: 56px; flex: none; border-radius: 50%; display: grid; place-items: center;
-    font-size: 1.7rem; background: var(--u); box-shadow: 0 4px 0 rgba(0,0,0,.18);
+  .bloco:active { transform: translateY(3px); border-bottom-width: 2px; }
+  .b-arte { position: relative; height: 112px; background: var(--u, var(--pink-soft)); display: grid; place-items: center; }
+  .b-arte svg { height: 94%; width: auto; max-width: 100%; display: block; }
+  .b-arte.larga { height: 124px; }
+  .b-arte.larga svg { width: 100%; height: 100%; }
+  .b-selo {
+    position: absolute; top: 8px; left: 8px; writing-mode: vertical-rl; background: #E25563; color: #fff;
+    font-family: "Ma Shan Zheng", "Noto Sans SC", serif; font-size: 1.05rem; line-height: 1.05;
+    padding: 5px 3px; border-radius: 6px; box-shadow: 0 2px 0 rgba(0,0,0,.12);
   }
-  .u-info { flex: 1; min-width: 0; }
-  .u-nome { font-weight: 900; font-size: 1.1rem; }
-  .u-sub { color: var(--muted); font-size: .9rem; font-weight: 700; margin: 2px 0 8px; }
+  .b-info { padding: 10px 12px 12px; }
+  .b-nome { font-weight: 900; font-size: 1.05rem; line-height: 1.25; }
+  .b-sub { color: var(--muted); font-size: .85rem; font-weight: 700; margin: 2px 0 8px; }
+  .h-bloco .b-sub { margin-bottom: 0; }
+  .h-tit { color: var(--primary); font-size: 1.4rem; margin-right: 4px; }
+  .b-coroa { position: absolute; top: 8px; right: 10px; font-size: 1.4rem; }
   .u-bar { height: 10px; background: var(--border); border-radius: 99px; overflow: hidden; }
   .u-bar div { height: 100%; background: var(--gold); border-radius: 99px; transition: width .4s; }
-  .u-coroa { font-size: 1.4rem; }
 
   .livre { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .tile svg { width: 46px; height: 46px; }
   .tile {
-    font: inherit; color: inherit; cursor: pointer; font-size: 1.8rem;
+    font: inherit; color: inherit; cursor: pointer; font-size: 1rem;
     background: var(--card); border: 2px solid var(--border); border-bottom-width: 5px; border-radius: 18px;
     padding: 14px 6px 10px; display: flex; flex-direction: column; align-items: center; gap: 4px;
   }
@@ -217,13 +241,11 @@
 
   /* Histórias */
   .h-top-titulo { font-weight: 900; font-size: 1.1rem; }
-  .h-card .u-emoji { background: var(--pink-soft); }
-  .h-capa {
-    display: flex; gap: 14px; align-items: center; background: var(--card);
-    border: 2px solid var(--border); border-radius: 22px; padding: 16px; margin-bottom: 14px;
-  }
-  .h-emoji { font-size: 3rem; }
-  .h-zh { font-size: 1.9rem; font-weight: 700; color: var(--primary); line-height: 1.2; }
+  .h-capa { background: var(--card); border: 2px solid var(--border); border-radius: 22px; overflow: hidden; margin-bottom: 14px; }
+  .h-banner { height: 130px; }
+  .h-banner svg { width: 100%; height: 100%; display: block; }
+  .h-capa-txt { padding: 12px 16px 14px; }
+  .h-zh { font-size: 2.2rem; color: var(--primary); line-height: 1.15; }
   .h-pt { font-weight: 900; font-size: 1.1rem; }
   .h-epoca { color: var(--muted); font-size: .85rem; font-weight: 700; margin-top: 2px; }
   .h-contexto {
@@ -280,6 +302,82 @@
   }
   .q-tr { color: var(--muted); font-weight: 700; margin-top: 4px; }
   .big-q { font-size: 1.6rem; font-weight: 700; line-height: 1.3; }
+
+  /* Leitura guiada: partes da história + pergunta do Bao */
+  .h-parte { animation: surge .35s ease-out; }
+  @keyframes surge { from { opacity: 0; transform: translateY(10px); } }
+  .h-parte-tit {
+    font-weight: 900; color: var(--muted); font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .8px; margin: 18px 4px 8px;
+  }
+  .h-perg { background: var(--sel-soft); border: 2px solid #D6D0FF; border-radius: 20px; padding: 14px; margin: 14px 0 6px; }
+  .h-perg.treme { animation: treme .35s; }
+  .hp-top { font-weight: 900; color: var(--sel); margin-bottom: 8px; }
+  .hp-q, .hm-linha { display: flex; gap: 10px; align-items: flex-start; }
+  .hp-zh { font-size: 1.45rem; font-weight: 700; line-height: 1.3; }
+  .hp-tr { display: none; color: var(--muted); font-weight: 700; margin-top: 4px; }
+  .h-perg.com-tr .hp-tr { display: block; }
+  .sem-py .hp-py, .sem-py .hm-py { display: none; }
+  .hp-resp { display: flex; gap: 8px; margin-top: 12px; }
+  .hp-input {
+    flex: 1; min-width: 0; font: inherit; font-weight: 800; font-size: 1.1rem; color: var(--ink);
+    background: var(--card); border: 2px solid var(--border); border-radius: 14px; padding: 12px 14px; outline: none;
+  }
+  .hp-input:focus { border-color: var(--sel); }
+  .hp-input:disabled { background: var(--ok-soft); border-color: var(--ok); color: var(--ok-dark); }
+  .hp-mic {
+    font: inherit; cursor: pointer; border: none; border-radius: 14px; width: 52px; flex: none; font-size: 1.3rem;
+    background: var(--primary); color: #fff; box-shadow: 0 4px 0 var(--primary-dark);
+  }
+  .hp-mic:active { transform: translateY(4px); box-shadow: none; }
+  .hp-mic.ouvindo { animation: pulsa 1s infinite; }
+  .hp-dica { color: var(--muted); font-size: .8rem; font-weight: 700; margin: 6px 2px 0; }
+  .hp-acoes { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; margin-top: 10px; }
+  .hp-acoes .btn.small { margin-left: 0; }
+  .hp-link { font: inherit; background: none; border: none; color: var(--sel); font-weight: 800; cursor: pointer; padding: 6px 0; font-size: .92rem; }
+  .hp-fb { font-weight: 800; margin-top: 8px; }
+  .hp-fb:empty { display: none; }
+  .hp-fb.ok { color: var(--ok-dark); }
+  .hp-fb.bad { color: var(--bad); }
+  .hp-modelo { display: none; background: var(--card); border: 2px dashed var(--border); border-radius: 14px; padding: 10px 12px; margin-top: 10px; }
+  .h-perg.revelada .hp-modelo { display: block; }
+  .hm-tit { font-size: .78rem; font-weight: 900; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+  .hm-zh { font-size: 1.3rem; font-weight: 700; }
+  .hp-seguir { display: none; margin-top: 12px; }
+  .h-perg.revelada .hp-seguir { display: block; }
+  .h-perg.seguiu .hp-seguir { display: none; }
+
+  /* Bao, o panda (desenho próprio em SVG, animado só com CSS) */
+  .mascote { width: 76px; height: 82px; flex: none; animation: none; }
+  .fim-box .mascote { width: 130px; height: 140px; margin: 0 auto; animation: pula .8s ease-in-out infinite; }
+  .prompt .mini { width: 60px; height: 64px; flex: none; }
+  .mini-p { display: inline-block; width: 26px; height: 28px; vertical-align: -8px; }
+  .panda { width: 100%; height: 100%; display: block; overflow: visible; }
+  .panda .p-todo { transform-origin: 50px 100px; animation: respira 3.2s ease-in-out infinite; }
+  .panda .p-olhos { transform-origin: 50px 45px; animation: pisca 4.5s infinite; }
+  .panda .p-braco { transform-origin: 74px 72px; animation: acena 3s ease-in-out infinite; }
+  .panda .p-cabeca { transform-origin: 50px 66px; transition: transform .3s; }
+  .panda .p-triste { display: none; }
+  @keyframes respira { 50% { transform: scale(1.03, .97); } }
+  @keyframes pisca { 0%, 90%, 100% { transform: scaleY(1); } 94% { transform: scaleY(.08); } }
+  @keyframes acena { 0%, 55%, 100% { transform: rotate(0); } 65% { transform: rotate(-35deg); } 75% { transform: rotate(-5deg); } 85% { transform: rotate(-30deg); } }
+  /* Reações: pula de alegria quando acerta, fica tristinho quando erra */
+  .feliz .panda .p-todo { animation: pulinho .45s ease-out 2; }
+  .feliz .panda .p-braco { animation: comemora .45s ease-out 2; }
+  @keyframes pulinho { 40% { transform: translateY(-14px) scale(1.04, .96); } }
+  @keyframes comemora { 50% { transform: rotate(-70deg); } }
+  .triste .panda .p-cabeca { transform: rotate(-10deg) translateY(3px); }
+  .triste .panda .p-feliz { display: none; }
+  .triste .panda .p-triste { display: inline; }
+  .triste .panda .p-braco { animation: none; }
+  @media (prefers-reduced-motion: reduce) { .panda * { animation: none !important; } }
+
+  /* Selo de palavras para revisar */
+  .tile { position: relative; }
+  .badge {
+    position: absolute; top: 6px; right: 8px; background: var(--primary); color: #fff;
+    border-radius: 99px; font-size: .75rem; padding: 2px 7px; font-weight: 900;
+  }
 </style>
 </head>
 <body>
@@ -297,21 +395,24 @@
     </header>
 
     <div class="hero">
-      <div class="mascote">🐼</div>
-      <div class="balao"><span class="zh">你好，维尼修斯！</span><br><span id="frase-hero">Bora treinar hoje?</span></div>
+      <div class="hero-cena" id="heroCena"></div>
+      <div class="hero-conteudo">
+        <div class="mascote" data-panda></div>
+        <div class="balao"><span class="zh">你好，维尼修斯！</span><br><span id="frase-hero">Bora treinar hoje?</span></div>
+      </div>
     </div>
 
-    <h2>Unidades</h2>
-    <div id="unidades"></div>
+    <h2><span class="selo" title="dānyuán · unidades">单元</span> Unidades</h2>
+    <div id="unidades" class="blocos"></div>
 
-    <h2>Histórias da China</h2>
-    <div id="historias"></div>
+    <h2><span class="selo" title="gùshi · histórias">故事</span> Histórias da China</h2>
+    <div id="historias" class="blocos uma"></div>
 
-    <h2>Treino livre</h2>
+    <h2><span class="selo" title="liànxí · praticar">练习</span> Treino livre</h2>
     <div class="livre">
-      <button class="tile" data-modo="pares">🧩<span>Pares</span></button>
-      <button class="tile" data-modo="falar" id="tileFalar">🎤<span>Pronúncia</span></button>
-      <button class="tile" data-modo="revisao">🔁<span>Revisão</span></button>
+      <button class="tile" data-modo="pares"><span>Pares</span></button>
+      <button class="tile" data-modo="falar" id="tileFalar"><span>Pronúncia</span></button>
+      <button class="tile" data-modo="revisao"><span>Revisão</span><b class="badge hidden" id="revBadge"></b></button>
     </div>
     <p class="aviso" id="avisoMic"></p>
   </section>
@@ -351,7 +452,7 @@
   <!-- FIM -->
   <section id="fim" class="screen hidden">
     <div class="fim-box">
-      <div class="mascote">🐼</div>
+      <div class="mascote" data-panda></div>
       <h1>Lição completa!</h1>
       <div class="cards-fim">
         <div class="cf" style="--c: var(--gold)"><small>XP</small><b id="fimXp">0</b></div>
@@ -366,7 +467,7 @@
 <script>
 /* ================== VOCABULÁRIO ================== */
 const UNIDADES = [
-  { id: "saud", nome: "Saudações", emoji: "👋", cor: "#FDE2E2", itens: [
+  { id: "saud", nome: "Saudações", zh: "你好", zhp: "nǐ hǎo", emoji: "👋", cor: "#FDE2E2", itens: [
     { h: "你好", p: "nǐ hǎo", pt: "olá" },
     { h: "再见", p: "zàijiàn", pt: "tchau" },
     { h: "谢谢", p: "xièxie", pt: "obrigado" },
@@ -375,7 +476,7 @@ const UNIDADES = [
     { h: "你好吗", p: "nǐ hǎo ma", pt: "tudo bem?" },
     { h: "我很好", p: "wǒ hěn hǎo", pt: "estou bem" }
   ]},
-  { id: "apres", nome: "Apresentação", emoji: "🙋", cor: "#FFEFC2", itens: [
+  { id: "apres", nome: "Apresentação", zh: "我叫", zhp: "wǒ jiào · eu me chamo", emoji: "🙋", cor: "#FFEFC2", itens: [
     { h: "我叫维尼修斯", p: "wǒ jiào Wéiníxiūsī", pt: "meu nome é Vinícius" },
     { h: "你叫什么名字", p: "nǐ jiào shénme míngzi", pt: "como você se chama?" },
     { h: "很高兴认识你", p: "hěn gāoxìng rènshi nǐ", pt: "prazer em te conhecer" },
@@ -383,30 +484,32 @@ const UNIDADES = [
     { h: "我是学生", p: "wǒ shì xuésheng", pt: "eu sou estudante" },
     { h: "我不懂", p: "wǒ bù dǒng", pt: "eu não entendo" }
   ]},
-  { id: "num", nome: "Números", emoji: "🔢", cor: "#DCEBFF", itens: [
-    { h: "一", p: "yī", pt: "um" },
-    { h: "二", p: "èr", pt: "dois" },
-    { h: "三", p: "sān", pt: "três" },
-    { h: "四", p: "sì", pt: "quatro" },
-    { h: "五", p: "wǔ", pt: "cinco" },
-    { h: "六", p: "liù", pt: "seis" },
-    { h: "七", p: "qī", pt: "sete" },
-    { h: "八", p: "bā", pt: "oito" },
-    { h: "九", p: "jiǔ", pt: "nove" },
-    { h: "十", p: "shí", pt: "dez" }
+  // alt: hanzi de mesmo som aceitos na fala. Palavras de uma sílaba só confundem o
+  // reconhecimento de voz (三 vira 山, 九 vira 酒...), então aceitamos os homófonos.
+  { id: "num", nome: "Números", zh: "数字", zhp: "shùzì · números", emoji: "🔢", cor: "#DCEBFF", itens: [
+    { h: "一", p: "yī", pt: "um", alt: ["医", "衣", "依", "伊", "壹"] },
+    { h: "二", p: "èr", pt: "dois", alt: ["儿", "而", "耳", "尔", "贰"] },
+    { h: "三", p: "sān", pt: "três", alt: ["山", "伞", "散", "叁"] },
+    { h: "四", p: "sì", pt: "quatro", alt: ["死", "思", "丝", "斯", "寺", "似", "肆"] },
+    { h: "五", p: "wǔ", pt: "cinco", alt: ["无", "舞", "午", "屋", "吴", "武", "伍"] },
+    { h: "六", p: "liù", pt: "seis", alt: ["流", "留", "刘", "柳", "溜", "陆"] },
+    { h: "七", p: "qī", pt: "sete", alt: ["期", "起", "气", "妻", "其", "齐", "漆", "柒"] },
+    { h: "八", p: "bā", pt: "oito", alt: ["吧", "爸", "把", "巴", "拔", "捌"] },
+    { h: "九", p: "jiǔ", pt: "nove", alt: ["酒", "久", "就", "旧", "救", "玖"] },
+    { h: "十", p: "shí", pt: "dez", alt: ["时", "是", "事", "石", "实", "识", "拾"] }
   ]},
-  { id: "pess", nome: "Pessoas", emoji: "👥", cor: "#E6DCFF", itens: [
-    { h: "我", p: "wǒ", pt: "eu" },
-    { h: "你", p: "nǐ", pt: "você" },
-    { h: "他", p: "tā", pt: "ele", alt: ["她", "它"] },
-    { h: "她", p: "tā", pt: "ela", alt: ["他", "它"] },
+  { id: "pess", nome: "Pessoas", zh: "人", zhp: "rén · pessoa", emoji: "👥", cor: "#E6DCFF", itens: [
+    { h: "我", p: "wǒ", pt: "eu", alt: ["喔", "握", "窝", "卧", "沃"] },
+    { h: "你", p: "nǐ", pt: "você", alt: ["泥", "尼", "逆", "拟"] },
+    { h: "他", p: "tā", pt: "ele", alt: ["她", "它", "塔", "踏"] },
+    { h: "她", p: "tā", pt: "ela", alt: ["他", "它", "塔", "踏"] },
     { h: "朋友", p: "péngyou", pt: "amigo" },
     { h: "老师", p: "lǎoshī", pt: "professor" },
     { h: "学生", p: "xuésheng", pt: "estudante" }
   ]},
-  { id: "com", nome: "Comida", emoji: "🍜", cor: "#D9F4E4", itens: [
-    { h: "水", p: "shuǐ", pt: "água" },
-    { h: "茶", p: "chá", pt: "chá" },
+  { id: "com", nome: "Comida", zh: "吃", zhp: "chī · comer", emoji: "🍜", cor: "#D9F4E4", itens: [
+    { h: "水", p: "shuǐ", pt: "água", alt: ["谁", "睡", "税"] },
+    { h: "茶", p: "chá", pt: "chá", alt: ["查", "差", "叉", "插", "察"] },
     { h: "咖啡", p: "kāfēi", pt: "café" },
     { h: "米饭", p: "mǐfàn", pt: "arroz" },
     { h: "面条", p: "miàntiáo", pt: "macarrão" },
@@ -427,7 +530,7 @@ const HISTORIAS = [{
   pt: "O camponês e o coelho",
   epoca: "Reino de Song · Período dos Reinos Combatentes (séc. III a.C.)",
   contexto: "Essa fábula está no livro do filósofo Han Feizi, escrito há mais de 2.200 anos. Ele contou a história para criticar quem fica preso ao passado, esperando que a sorte se repita. Hoje, 守株待兔 é um chengyu: uma expressão de quatro caracteres que todo chinês conhece. Aqui ela foi recontada em chinês simples, pra iniciantes.",
-  frases: [
+  partes: [{ frases: [
     { pt: "Há muito tempo, no reino de Song, havia um camponês.", t: [
       ["很久", "hěn jiǔ", "muito tempo"], ["以前", "yǐqián", "atrás / antes"], "，",
       ["宋国", "Sòngguó", "reino de Song"], ["有", "yǒu", "ter / haver"],
@@ -437,7 +540,10 @@ const HISTORIAS = [{
       ["田里", "tián lǐ", "no campo (田 = campo plantado)"], ["工作", "gōngzuò", "trabalhar"], "。"] },
     { pt: "No campo havia uma árvore.", t: [
       ["田里", "tián lǐ", "no campo"], ["有", "yǒu", "havia"],
-      ["一棵", "yì kē", "uma (classificador de árvores)"], ["树", "shù", "árvore"], "。"] },
+      ["一棵", "yì kē", "uma (classificador de árvores)"], ["树", "shù", "árvore"], "。"] }
+  ], q: { h: "农民每天在哪里工作？", p: "Nóngmín měitiān zài nǎlǐ gōngzuò?", pt: "Onde o camponês trabalhava todo dia?",
+    r: { h: "他每天在田里工作。", p: "Tā měitiān zài tián lǐ gōngzuò.", pt: "Ele trabalhava no campo todo dia." }, k: ["田|tián"] }
+  }, { frases: [
     { pt: "Um dia, um coelho veio correndo muito rápido.", t: [
       ["有一天", "yǒu yì tiān", "um dia"], "，", ["一只", "yì zhī", "um (classificador de animais)"],
       ["兔子", "tùzi", "coelho"], ["跑得", "pǎo de", "corria (de um jeito...)"], ["很快", "hěn kuài", "muito rápido"], "。"] },
@@ -446,14 +552,20 @@ const HISTORIAS = [{
       ["死了", "sǐ le", "morreu"], "。"] },
     { pt: "O camponês ficou muito feliz e pensou: \"Que ótimo!\"", t: [
       ["农民", "nóngmín", "camponês"], ["很", "hěn", "muito"], ["高兴", "gāoxìng", "feliz"], "，",
-      ["他", "tā", "ele"], ["想", "xiǎng", "pensar"], "：“", ["太好了", "tài hǎo le", "que ótimo!"], "！”"] },
+      ["他", "tā", "ele"], ["想", "xiǎng", "pensar"], "：“", ["太好了", "tài hǎo le", "que ótimo!"], "！”"] }
+  ], q: { h: "兔子撞到了什么？", p: "Tùzi zhuàng dào le shénme?", pt: "Em que o coelho bateu?",
+    r: { h: "兔子撞到了树。", p: "Tùzi zhuàng dào le shù.", pt: "O coelho bateu na árvore." }, k: ["树|shù"] }
+  }, { frases: [
     { pt: "Ele pensou: \"Não vou mais trabalhar, vou esperar coelhos todo dia.\"", t: [
       ["他", "tā", "ele"], ["想", "xiǎng", "pensou"], "：“", ["我", "wǒ", "eu"], ["不", "bù", "não"],
       ["工作", "gōngzuò", "trabalhar"], ["了", "le", "(indica mudança: \"não mais\")"], "，",
       ["我", "wǒ", "eu"], ["每天", "měitiān", "todo dia"], ["等", "děng", "esperar"], ["兔子", "tùzi", "coelho"], "。”"] },
     { pt: "Todo dia ele sentava debaixo da árvore e esperava.", t: [
       ["他", "tā", "ele"], ["每天", "měitiān", "todo dia"], ["坐在", "zuò zài", "sentar em"],
-      ["树下", "shù xià", "debaixo da árvore"], ["等", "děng", "esperar"], "。"] },
+      ["树下", "shù xià", "debaixo da árvore"], ["等", "děng", "esperar"], "。"] }
+  ], q: { h: "他每天做什么？", p: "Tā měitiān zuò shénme?", pt: "O que ele fazia todo dia?",
+    r: { h: "他每天坐在树下等兔子。", p: "Tā měitiān zuò zài shù xià děng tùzi.", pt: "Todo dia ele sentava debaixo da árvore e esperava coelhos." }, k: ["等|děng"] }
+  }, { frases: [
     { pt: "Mas nenhum coelho apareceu de novo.", t: [
       ["可是", "kěshì", "mas / porém"], "，", ["兔子", "tùzi", "coelho"], ["没有", "méiyǒu", "não (no passado)"],
       ["再", "zài", "de novo (som igual a 在!)"], ["来", "lái", "vir"], "。"] },
@@ -463,7 +575,9 @@ const HISTORIAS = [{
     { pt: "Isso é o \"守株待兔\": esperar o coelho ao lado do toco.", t: [
       ["这", "zhè", "isso / este"], ["就是", "jiù shì", "é justamente"], "“",
       ["守株待兔", "shǒu zhū dài tù", "守 vigiar · 株 toco de árvore · 待 esperar · 兔 coelho"], "”。"] }
-  ],
+  ], q: { h: "兔子再来了吗？", p: "Tùzi zài lái le ma?", pt: "O coelho veio de novo?",
+    r: { h: "没有，兔子没有再来。", p: "Méiyǒu, tùzi méiyǒu zài lái.", pt: "Não, o coelho não veio de novo." }, k: ["没|méiyǒu|méi lái|不|bù"] }
+  }],
   moral: "Não fique parado esperando a sorte cair do céu de novo. O que o camponês ganhou foi um acaso; o que ele perdeu foi o trabalho de verdade. Em português seria tipo \"esperar sentado\".",
   perguntas: [
     { h: "农民在哪里工作？", p: "Nóngmín zài nǎlǐ gōngzuò?", pt: "Onde o camponês trabalhava?",
@@ -479,11 +593,410 @@ const HISTORIAS = [{
     { h: "这个故事想说什么？", p: "Zhège gùshi xiǎng shuō shénme?", pt: "O que essa história quer dizer?",
       ops: [["Não espere a sorte, faça sua parte"], ["Coelhos são perigosos"], ["Árvores trazem sorte"], ["Trabalhar é perda de tempo"]] }
   ]
+}, {
+  id: "cavalo",
+  emoji: "🐎",
+  titulo: "塞翁失马",
+  py: "Sài wēng shī mǎ",
+  pt: "O velho da fronteira perde o cavalo",
+  epoca: "Dinastia Han · livro 淮南子 (séc. II a.C.)",
+  contexto: "Essa história está no livro 淮南子 (Huáinánzǐ), escrito na dinastia Han há mais de 2.100 anos. Ela fala de um velho que nunca se desesperava nem se empolgava demais, porque sabia que sorte e azar vivem trocando de lugar. Repare como algumas frases se repetem: isso ajuda a fixar o vocabulário!",
+  partes: [{ frases: [
+    { pt: "Há muito tempo, havia um velho que morava na fronteira.", t: [
+      ["很久", "hěn jiǔ", "muito tempo"], ["以前", "yǐqián", "atrás / antes"], "，", ["有", "yǒu", "haver / ter"],
+      ["一个", "yí ge", "um (classificador geral)"], ["老人", "lǎorén", "velho / idoso"], ["住在", "zhù zài", "morar em"],
+      ["边境", "biānjìng", "fronteira"], "。"] },
+    { pt: "Todo mundo o chamava de “velho da fronteira”.", t: [
+      ["大家", "dàjiā", "todo mundo"], ["叫", "jiào", "chamar"], ["他", "tā", "ele"], "“",
+      ["塞翁", "Sài wēng", "塞 fronteira · 翁 velho"], "”。"] },
+    { pt: "Ele tinha um cavalo.", t: [
+      ["他", "tā", "ele"], ["有", "yǒu", "ter"], ["一匹", "yì pǐ", "um (classificador de cavalos)"], ["马", "mǎ", "cavalo"], "。"] },
+    { pt: "Um dia, o cavalo dele fugiu.", t: [
+      ["有一天", "yǒu yì tiān", "um dia"], "，", ["他的", "tā de", "dele (的 = de, posse)"], ["马", "mǎ", "cavalo"],
+      ["跑了", "pǎo le", "fugiu (跑 = correr)"], "。"] },
+    { pt: "Todo mundo disse: “Que pena!”", t: [
+      ["大家", "dàjiā", "todo mundo"], ["说", "shuō", "dizer"], "：“", ["太可惜了", "tài kěxī le", "que pena!"], "！”"] },
+    { pt: "O velho disse: “Isso não é necessariamente uma coisa ruim.”", t: [
+      ["老人", "lǎorén", "o velho"], ["说", "shuō", "dizer"], "：“", ["这", "zhè", "isso"],
+      ["不一定", "bù yídìng", "não necessariamente"], ["是", "shì", "ser"], ["坏事", "huài shì", "coisa ruim"], "。”"] }
+  ], q: { h: "老人的马怎么了？", p: "Lǎorén de mǎ zěnme le?", pt: "O que aconteceu com o cavalo do velho?",
+    r: { h: "他的马跑了。", p: "Tā de mǎ pǎo le.", pt: "O cavalo dele fugiu." }, k: ["跑|pǎo"] }
+  }, { frases: [
+    { pt: "Alguns meses depois, o cavalo voltou.", t: [
+      ["几个月", "jǐ ge yuè", "alguns meses"], ["以后", "yǐhòu", "depois"], "，", ["马", "mǎ", "cavalo"],
+      ["回来了", "huílai le", "voltou"], "。"] },
+    { pt: "E ele ainda trouxe um cavalo muito bom!", t: [
+      ["它", "tā", "ele (para animais e coisas)"], ["还", "hái", "ainda / além disso"], ["带来了", "dàilái le", "trouxe"],
+      ["一匹", "yì pǐ", "um (classificador de cavalos)"], ["好马", "hǎo mǎ", "cavalo bom"], "！"] },
+    { pt: "Todo mundo disse: “Que ótimo!”", t: [
+      ["大家", "dàjiā", "todo mundo"], ["说", "shuō", "dizer"], "：“", ["太好了", "tài hǎo le", "que ótimo!"], "！”"] },
+    { pt: "O velho disse: “Isso não é necessariamente uma coisa boa.”", t: [
+      ["老人", "lǎorén", "o velho"], ["说", "shuō", "dizer"], "：“", ["这", "zhè", "isso"],
+      ["不一定", "bù yídìng", "não necessariamente"], ["是", "shì", "ser"], ["好事", "hǎo shì", "coisa boa"], "。”"] }
+  ], q: { h: "马回来了吗？", p: "Mǎ huílai le ma?", pt: "O cavalo voltou?",
+    r: { h: "回来了，它还带来了一匹好马。", p: "Huílai le, tā hái dàilái le yì pǐ hǎo mǎ.", pt: "Voltou, e ainda trouxe um cavalo bom." }, k: ["回来|huílai"] }
+  }, { frases: [
+    { pt: "O filho do velho adorava montar esse cavalo bom.", t: [
+      ["老人的", "lǎorén de", "do velho"], ["儿子", "érzi", "filho"], ["很", "hěn", "muito"], ["喜欢", "xǐhuan", "gostar"],
+      ["骑", "qí", "montar / andar (a cavalo, de bicicleta)"], ["这匹", "zhè pǐ", "este (cavalo)"], ["好马", "hǎo mǎ", "cavalo bom"], "。"] },
+    { pt: "Um dia, ele caiu do cavalo e quebrou a perna.", t: [
+      ["有一天", "yǒu yì tiān", "um dia"], "，", ["他", "tā", "ele"], ["从", "cóng", "de (origem)"],
+      ["马上", "mǎ shang", "de cima do cavalo (cuidado: 马上 também quer dizer “já, imediatamente”!)"],
+      ["摔下来", "shuāi xiàlai", "cair (de cima)"], "，", ["腿", "tuǐ", "perna"], ["断了", "duàn le", "quebrou"], "。"] },
+    { pt: "Todo mundo disse: “Que pena!”", t: [
+      ["大家", "dàjiā", "todo mundo"], ["说", "shuō", "dizer"], "：“", ["太可惜了", "tài kěxī le", "que pena!"], "！”"] },
+    { pt: "O velho disse: “Isso não é necessariamente uma coisa ruim.”", t: [
+      ["老人", "lǎorén", "o velho"], ["说", "shuō", "dizer"], "：“", ["这", "zhè", "isso"],
+      ["不一定", "bù yídìng", "não necessariamente"], ["是", "shì", "ser"], ["坏事", "huài shì", "coisa ruim"], "。”"] }
+  ], q: { h: "老人的儿子怎么了？", p: "Lǎorén de érzi zěnme le?", pt: "O que aconteceu com o filho do velho?",
+    r: { h: "他从马上摔下来，腿断了。", p: "Tā cóng mǎ shang shuāi xiàlai, tuǐ duàn le.", pt: "Ele caiu do cavalo e quebrou a perna." }, k: ["腿|tuǐ|摔|shuāi|断|duàn"] }
+  }, { frases: [
+    { pt: "Um ano depois, começou uma guerra.", t: [
+      ["一年", "yì nián", "um ano"], ["以后", "yǐhòu", "depois"], "，", ["打仗了", "dǎzhàng le", "começou a guerra (打仗 = guerrear)"], "。"] },
+    { pt: "Todos os jovens foram para a guerra, e muitos morreram.", t: [
+      ["年轻人", "niánqīng rén", "jovens"], ["都", "dōu", "todos"], ["去", "qù", "ir"], ["打仗", "dǎzhàng", "guerrear / ir à guerra"], "，",
+      ["很多", "hěn duō", "muitos"], ["人", "rén", "pessoa(s)"], ["死了", "sǐ le", "morreram"], "。"] },
+    { pt: "O filho do velho estava com a perna quebrada e não pôde ir.", t: [
+      ["老人的", "lǎorén de", "do velho"], ["儿子", "érzi", "filho"], ["腿", "tuǐ", "perna"], ["断了", "duàn le", "quebrada"], "，",
+      ["不能", "bù néng", "não poder"], ["去", "qù", "ir"], "。"] },
+    { pt: "Por isso, ele sobreviveu.", t: [
+      ["所以", "suǒyǐ", "por isso"], "，", ["他", "tā", "ele"], ["活下来了", "huó xiàlai le", "sobreviveu (活 = viver)"], "。"] },
+    { pt: "Isso é o “塞翁失马”: o velho da fronteira perde o cavalo.", t: [
+      ["这", "zhè", "isso / este"], ["就是", "jiù shì", "é justamente"], "“",
+      ["塞翁失马", "Sài wēng shī mǎ", "塞 fronteira · 翁 velho · 失 perder · 马 cavalo"], "”。"] }
+  ], q: { h: "儿子为什么没去打仗？", p: "Érzi wèishénme méi qù dǎzhàng?", pt: "Por que o filho não foi para a guerra?",
+    r: { h: "因为他的腿断了。", p: "Yīnwèi tā de tuǐ duàn le.", pt: "Porque a perna dele estava quebrada." }, k: ["腿|tuǐ|断|duàn"] }
+  }],
+  moral: "Sorte e azar vivem trocando de lugar: o que parece ruim hoje pode virar algo bom amanhã, e o contrário também. Em chinês se diz 塞翁失马，焉知非福 (Sài wēng shī mǎ, yān zhī fēi fú): “o velho perdeu o cavalo, mas quem sabe se não foi sorte?”. Em português lembra “há males que vêm para bem”.",
+  perguntas: [
+    { h: "老人的马怎么了？", p: "Lǎorén de mǎ zěnme le?", pt: "O que aconteceu com o cavalo do velho?",
+      ops: [["跑了", "pǎo le", "fugiu"], ["死了", "sǐ le", "morreu"], ["生病了", "shēngbìng le", "ficou doente"], ["睡觉了", "shuìjiào le", "foi dormir"]] },
+    { h: "马回来的时候，带来了什么？", p: "Mǎ huílai de shíhou, dàilái le shénme?", pt: "Quando o cavalo voltou, o que ele trouxe?",
+      ops: [["一匹好马", "yì pǐ hǎo mǎ", "um cavalo bom"], ["一只兔子", "yì zhī tùzi", "um coelho"], ["很多钱", "hěn duō qián", "muito dinheiro"], ["一个朋友", "yí ge péngyou", "um amigo"]] },
+    { h: "儿子的什么断了？", p: "Érzi de shénme duàn le?", pt: "O que o filho quebrou?",
+      ops: [["腿", "tuǐ", "a perna"], ["手", "shǒu", "a mão"], ["牙", "yá", "o dente"], ["桌子", "zhuōzi", "a mesa"]] },
+    { h: "儿子为什么活下来了？", p: "Érzi wèishénme huó xiàlai le?", pt: "Por que o filho sobreviveu?",
+      ops: [["他没去打仗", "tā méi qù dǎzhàng", "ele não foi à guerra"], ["他很有钱", "tā hěn yǒu qián", "ele era rico"], ["他跑得很快", "tā pǎo de hěn kuài", "ele corria rápido"], ["他是老师", "tā shì lǎoshī", "ele era professor"]] },
+    { h: "这个故事想说什么？", p: "Zhège gùshi xiǎng shuō shénme?", pt: "O que essa história quer dizer?",
+      ops: [["Algo ruim pode virar algo bom (e vice-versa)"], ["Cavalos dão azar"], ["Nunca ande a cavalo"], ["Os vizinhos sempre têm razão"]] }
+  ]
+}, {
+  id: "sapo",
+  emoji: "🐸",
+  titulo: "井底之蛙",
+  py: "jǐng dǐ zhī wā",
+  pt: "O sapo no fundo do poço",
+  epoca: "Reinos Combatentes · livro 庄子 (séc. IV–III a.C.)",
+  contexto: "Essa história está no livro do filósofo 庄子 (Zhuāngzǐ), no capítulo 秋水 (“As águas do outono”), escrito há mais de 2.200 anos. Na versão original, o sapo se gaba do seu poço para uma tartaruga do Mar do Leste, e é ela quem conta como o mar é enorme. Hoje, chamar alguém de 井底之蛙 é dizer que a pessoa tem a visão de mundo pequena demais.",
+  partes: [{ frases: [
+    { pt: "Num poço velho, morava um sapo.", t: [
+      ["一口", "yì kǒu", "um (classificador de poços)"], ["老井", "lǎo jǐng", "poço velho"], ["里", "lǐ", "dentro"], "，",
+      ["住着", "zhù zhe", "morava (着 = ação que continua)"], ["一只", "yì zhī", "um (classificador de animais)"], ["青蛙", "qīngwā", "sapo / rã"], "。"] },
+    { pt: "Todo dia, o sapo pulava pra lá e pra cá dentro do poço.", t: [
+      ["青蛙", "qīngwā", "sapo"], ["每天", "měitiān", "todo dia"], ["在", "zài", "em"], ["井里", "jǐng lǐ", "no poço"],
+      ["跳来跳去", "tiào lái tiào qù", "pular pra lá e pra cá"], "。"] },
+    { pt: "Ele achava: “Meu poço é o melhor lugar do mundo!”", t: [
+      ["它", "tā", "ele (para animais e coisas)"], ["觉得", "juéde", "achar / sentir"], "：“", ["我的", "wǒ de", "meu"],
+      ["井", "jǐng", "poço"], ["是", "shì", "ser"], ["世界上", "shìjiè shang", "no mundo"], ["最好的", "zuì hǎo de", "o melhor"],
+      ["地方", "dìfang", "lugar"], "！”"] }
+  ], q: { h: "青蛙住在哪里？", p: "Qīngwā zhù zài nǎlǐ?", pt: "Onde o sapo morava?",
+    r: { h: "它住在井里。", p: "Tā zhù zài jǐng lǐ.", pt: "Ele morava no poço." }, k: ["井|jǐng"] }
+  }, { frases: [
+    { pt: "Um dia, uma grande tartaruga marinha chegou do Mar do Leste.", t: [
+      ["有一天", "yǒu yì tiān", "um dia"], "，", ["一只", "yì zhī", "um (classificador de animais)"], ["大", "dà", "grande"],
+      ["海龟", "hǎiguī", "tartaruga marinha"], ["从", "cóng", "de (origem)"], ["东海", "Dōnghǎi", "Mar do Leste"], ["来了", "lái le", "chegou"], "。"] },
+    { pt: "O sapo disse: “Meu poço é ótimo, entra pra brincar!”", t: [
+      ["青蛙", "qīngwā", "sapo"], ["说", "shuō", "dizer"], "：“", ["我的", "wǒ de", "meu"], ["井", "jǐng", "poço"],
+      ["太好了", "tài hǎo le", "é ótimo demais"], "，", ["你", "nǐ", "você"], ["进来", "jìnlai", "entrar (vir para dentro)"],
+      ["玩", "wán", "brincar / se divertir"], ["吧", "ba", "(sugestão: “vem”, “vamos”)"], "！”"] },
+    { pt: "Mas a tartaruga era grande demais e o poço pequeno demais: ela não conseguia entrar.", t: [
+      ["可是", "kěshì", "mas"], ["海龟", "hǎiguī", "tartaruga marinha"], ["太大了", "tài dà le", "grande demais"], "，",
+      ["井", "jǐng", "poço"], ["太小了", "tài xiǎo le", "pequeno demais"], "，", ["它", "tā", "ela (animal)"],
+      ["进不去", "jìn bu qù", "não conseguir entrar"], "。"] }
+  ], q: { h: "海龟能进井里吗？", p: "Hǎiguī néng jìn jǐng lǐ ma?", pt: "A tartaruga conseguia entrar no poço?",
+    r: { h: "不能，它进不去。", p: "Bù néng, tā jìn bu qù.", pt: "Não, ela não conseguia entrar." }, k: ["不|bù|没|méi"] }
+  }, { frases: [
+    { pt: "A tartaruga disse: “Você conhece o mar?”", t: [
+      ["海龟", "hǎiguī", "tartaruga marinha"], ["说", "shuō", "dizer"], "：“", ["你", "nǐ", "você"],
+      ["知道", "zhīdào", "saber / conhecer"], ["大海", "dàhǎi", "o mar"], ["吗", "ma", "(faz pergunta de sim ou não)"], "？”"] },
+    { pt: "“O mar é enorme, não dá pra ver onde ele acaba.”", t: [
+      "“", ["大海", "dàhǎi", "o mar"], ["非常", "fēicháng", "extremamente"], ["大", "dà", "grande"], "，",
+      ["看不到", "kàn bu dào", "não dá pra ver"], ["边", "biān", "borda / fim"], "。”"] },
+    { pt: "“Se chove muito, o mar não aumenta; se não chove, o mar também não diminui.”", t: [
+      "“", ["下", "xià", "cair (chuva)"], ["很多", "hěn duō", "muita"], ["雨", "yǔ", "chuva"], "，", ["大海", "dàhǎi", "o mar"],
+      ["不会", "bú huì", "não vai"], ["多", "duō", "aumentar (ficar mais)"], "；", ["不下雨", "bú xià yǔ", "não chover"], "，",
+      ["大海", "dàhǎi", "o mar"], ["也", "yě", "também"], ["不会", "bú huì", "não vai"], ["少", "shǎo", "diminuir (ficar menos)"], "。”"] },
+    { pt: "“Morar no mar, isso sim é felicidade de verdade!”", t: [
+      "“", ["住在", "zhù zài", "morar em"], ["大海里", "dàhǎi lǐ", "no mar"], "，", ["才是", "cái shì", "isso sim é"],
+      ["真的", "zhēn de", "de verdade"], ["快乐", "kuàilè", "felicidade / feliz"], "！”"] }
+  ], q: { h: "大海怎么样？", p: "Dàhǎi zěnmeyàng?", pt: "Como é o mar?",
+    r: { h: "大海非常大，看不到边。", p: "Dàhǎi fēicháng dà, kàn bu dào biān.", pt: "O mar é enorme, não dá pra ver onde acaba." },
+    k: ["很大|非常大|太大|特别大|真大|看不到|hěn dà|fēicháng dà|tài dà|tèbié dà|zhēn dà|kàn bu dào"] }
+  }, { frases: [
+    { pt: "O sapo ouviu e ficou muito espantado.", t: [
+      ["青蛙", "qīngwā", "sapo"], ["听了", "tīng le", "ouviu"], "，", ["非常", "fēicháng", "muito"], ["吃惊", "chījīng", "espantado / surpreso"], "。"] },
+    { pt: "Pela primeira vez, ele soube que fora do poço existia um mundo enorme.", t: [
+      ["它", "tā", "ele (animal)"], ["第一次", "dì yī cì", "pela primeira vez"], ["知道", "zhīdào", "saber"], "，",
+      ["井", "jǐng", "poço"], ["外面", "wàimian", "lá fora"], ["还有", "hái yǒu", "ainda existe"], ["很大的", "hěn dà de", "muito grande"],
+      ["世界", "shìjiè", "mundo"], "。"] },
+    { pt: "Isso é o “井底之蛙”: o sapo no fundo do poço.", t: [
+      ["这", "zhè", "isso / este"], ["就是", "jiù shì", "é justamente"], "“",
+      ["井底之蛙", "jǐng dǐ zhī wā", "井 poço · 底 fundo · 之 de (chinês clássico) · 蛙 sapo"], "”。"] }
+  ], q: { h: "井外面有什么？", p: "Jǐng wàimian yǒu shénme?", pt: "O que existe fora do poço?",
+    r: { h: "井外面有很大的世界。", p: "Jǐng wàimian yǒu hěn dà de shìjiè.", pt: "Fora do poço existe um mundo enorme." }, k: ["世界|shìjiè|大海|dàhǎi"] }
+  }],
+  moral: "Quem nunca sai do seu cantinho acha que ele é o mundo inteiro. Na China, chamar alguém de 井底之蛙 é dizer que a pessoa tem visão estreita e nem sabe o quanto não sabe. O remédio é sair do poço: viajar, ler, aprender coisas novas… tipo chinês! 😉",
+  perguntas: [
+    { h: "青蛙住在哪里？", p: "Qīngwā zhù zài nǎlǐ?", pt: "Onde o sapo morava?",
+      ops: [["井里", "jǐng lǐ", "no poço"], ["海里", "hǎi lǐ", "no mar"], ["树上", "shù shang", "na árvore"], ["家里", "jiā lǐ", "em casa"]] },
+    { h: "谁从东海来了？", p: "Shéi cóng Dōnghǎi lái le?", pt: "Quem chegou do Mar do Leste?",
+      ops: [["海龟", "hǎiguī", "a tartaruga marinha"], ["兔子", "tùzi", "o coelho"], ["老人", "lǎorén", "o velho"], ["小猫", "xiǎo māo", "o gatinho"]] },
+    { h: "海龟为什么进不去？", p: "Hǎiguī wèishénme jìn bu qù?", pt: "Por que a tartaruga não conseguia entrar?",
+      ops: [["井太小了", "jǐng tài xiǎo le", "o poço é pequeno demais"], ["井里没有水", "jǐng lǐ méiyǒu shuǐ", "o poço não tem água"], ["青蛙不让它进", "qīngwā bú ràng tā jìn", "o sapo não deixou"], ["海龟很累", "hǎiguī hěn lèi", "a tartaruga estava cansada"]] },
+    { h: "下很多雨，大海会怎么样？", p: "Xià hěn duō yǔ, dàhǎi huì zěnmeyàng?", pt: "Se chove muito, o que acontece com o mar?",
+      ops: [["不会多", "bú huì duō", "não aumenta"], ["会多很多", "huì duō hěn duō", "aumenta muito"], ["会变小", "huì biàn xiǎo", "diminui"], ["会没有了", "huì méiyǒu le", "some"]] },
+    { h: "这个故事想说什么？", p: "Zhège gùshi xiǎng shuō shénme?", pt: "O que essa história quer dizer?",
+      ops: [["Seu cantinho não é o mundo todo"], ["Poços são perigosos"], ["Tartarugas mentem"], ["Nunca saia de casa"]] }
+  ]
 }];
+
+/* ================== DESENHOS ================== */
+// Tudo desenhado aqui em SVG (sem imagens de fora), nas cores pastel do app.
+function panda() {
+  return `<svg class="panda" viewBox="0 0 100 108" aria-hidden="true"><g class="p-todo">
+    <ellipse cx="50" cy="104" rx="26" ry="3.5" fill="#000" opacity=".08"/>
+    <ellipse cx="36" cy="99" rx="10" ry="6" fill="#33403C"/><ellipse cx="64" cy="99" rx="10" ry="6" fill="#33403C"/>
+    <ellipse cx="50" cy="80" rx="26" ry="21" fill="#fff" stroke="#DCE5E1" stroke-width="1.5"/>
+    <path d="M30 66 Q50 76 70 66 L68 72 Q50 80 32 72 Z" fill="#E25563"/>
+    <ellipse cx="25" cy="80" rx="8" ry="12" fill="#33403C" transform="rotate(18 25 80)"/>
+    <path d="M18 92 Q14 70 22 50" stroke="#7CC9A5" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M21 60 q-9 -4 -12 -12 q9 2 12 12 M19 72 q8 -6 14 -4 q-6 7 -14 4" fill="#A8DCC3"/>
+    <g class="p-braco"><ellipse cx="76" cy="62" rx="8" ry="13" fill="#33403C" transform="rotate(25 76 62)"/></g>
+    <g class="p-cabeca">
+      <circle cx="27" cy="18" r="10" fill="#33403C"/><circle cx="73" cy="18" r="10" fill="#33403C"/>
+      <circle cx="27" cy="18" r="4.5" fill="#5B6B66"/><circle cx="73" cy="18" r="4.5" fill="#5B6B66"/>
+      <circle cx="50" cy="42" r="29" fill="#fff" stroke="#DCE5E1" stroke-width="1.5"/>
+      <ellipse cx="38" cy="45" rx="8.5" ry="11" fill="#33403C" transform="rotate(28 38 45)"/>
+      <ellipse cx="62" cy="45" rx="8.5" ry="11" fill="#33403C" transform="rotate(-28 62 45)"/>
+      <g class="p-olhos">
+        <circle cx="39" cy="44" r="4" fill="#fff"/><circle cx="61" cy="44" r="4" fill="#fff"/>
+        <circle cx="40" cy="44.5" r="2.2" fill="#22302C"/><circle cx="62" cy="44.5" r="2.2" fill="#22302C"/>
+        <circle cx="38.6" cy="42.8" r=".9" fill="#fff"/><circle cx="60.6" cy="42.8" r=".9" fill="#fff"/>
+      </g>
+      <ellipse cx="29" cy="56" rx="5" ry="3" fill="#F7A1B5" opacity=".8"/><ellipse cx="71" cy="56" rx="5" ry="3" fill="#F7A1B5" opacity=".8"/>
+      <ellipse cx="50" cy="54" rx="4.5" ry="3.2" fill="#33403C"/>
+      <path class="p-feliz" d="M44 59 Q50 66 56 59" fill="#F06A8F" stroke="#33403C" stroke-width="1.8" stroke-linecap="round"/>
+      <path class="p-triste" d="M44 63 Q50 58 56 63" fill="none" stroke="#33403C" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+  </g></svg>`;
+}
+// Faz o Bao reagir (ok = pulinho, senão fica tristinho) dentro de um elemento
+function reagir(el, ok) {
+  if (!el) return;
+  el.classList.remove("feliz", "triste"); void el.offsetWidth;
+  el.classList.add(ok ? "feliz" : "triste");
+}
+
+function lanterna(x, y, s = 1) {
+  return `<g transform="translate(${x} ${y}) scale(${s})">
+    <line x1="0" y1="0" x2="0" y2="8" stroke="#C98B5B" stroke-width="2"/>
+    <rect x="-8" y="7" width="16" height="5" rx="1.5" fill="#F5C344"/>
+    <ellipse cx="0" cy="29" rx="19" ry="17" fill="#F2626B"/>
+    <ellipse cx="0" cy="29" rx="10" ry="17" fill="none" stroke="#D9434F" stroke-width="1.6"/>
+    <line x1="0" y1="12" x2="0" y2="46" stroke="#D9434F" stroke-width="1.6"/>
+    <ellipse cx="-8" cy="22" rx="4" ry="6" fill="#fff" opacity=".3"/>
+    <rect x="-8" y="45" width="16" height="5" rx="1.5" fill="#F5C344"/>
+    <path d="M-3 50 L-4 63 M0 50 L0 65 M3 50 L4 63" stroke="#F5C344" stroke-width="2" stroke-linecap="round"/>
+  </g>`;
+}
+function nuvem(x, y, s = 1) {
+  return `<path transform="translate(${x} ${y}) scale(${s})" d="M0 12 q2 -10 12 -8 q4 -8 14 -4 q8 -4 12 4 q8 0 8 8 z" fill="#fff" opacity=".9"/>`;
+}
+const contas = [[28, "#F2626B", [24, 41, 50, 68]], [44, "#7CC9A5", [28, 41, 59, 68]], [60, "#F5C344", [24, 50, 59, 68]],
+                [76, "#8A7CF0", [28, 41, 50, 68]], [92, "#6BA4D8", [24, 41, 59, 68]]];
+
+const ARTE = {
+  // Saudações: lanternas de boas-vindas
+  saud: `<svg viewBox="0 0 120 90" aria-hidden="true">
+    <path d="M6 10 Q60 24 114 10" fill="none" stroke="#C98B5B" stroke-width="2"/>
+    ${lanterna(38, 16)}${lanterna(82, 16, .85)}
+    <path d="M4 84 q4 -9 12 -5 q4 -8 12 -2 q8 -1 7 7 z" fill="#fff" opacity=".85"/>
+    <path d="M94 86 q3 -7 9 -4 q4 -6 10 -1 q6 0 5 5 z" fill="#fff" opacity=".85"/>
+  </svg>`,
+  // Apresentação: carimbo com o nome (印章)
+  apres: `<svg viewBox="0 0 120 90" aria-hidden="true">
+    <rect x="10" y="26" width="52" height="56" rx="4" fill="#FFF8EC" stroke="#EAD9BF" stroke-width="2"/>
+    <rect x="19" y="35" width="34" height="34" rx="4" fill="#E25563"/>
+    <rect x="22.5" y="38.5" width="27" height="27" rx="2" fill="none" stroke="#fff" stroke-width="1.5" opacity=".8"/>
+    <text x="36" y="62" text-anchor="middle" font-size="23" fill="#fff" font-family="Ma Shan Zheng, Noto Sans SC, sans-serif">我</text>
+    <line x1="20" y1="75" x2="52" y2="75" stroke="#EAD9BF" stroke-width="2" stroke-linecap="round"/>
+    <g transform="rotate(12 88 44)">
+      <rect x="76" y="44" width="24" height="10" rx="2" fill="#E25563"/>
+      <rect x="78" y="20" width="20" height="26" rx="7" fill="#C98B5B"/>
+      <circle cx="88" cy="16" r="7" fill="#B5784A"/>
+      <rect x="80" y="30" width="16" height="3" rx="1.5" fill="#B5784A"/>
+    </g>
+  </svg>`,
+  // Números: ábaco (算盘)
+  num: `<svg viewBox="0 0 120 90" aria-hidden="true">
+    <rect x="12" y="14" width="96" height="64" rx="6" fill="#FFF8EC" stroke="#B5784A" stroke-width="6"/>
+    <g stroke="#C98B5B" stroke-width="2">${contas.map(([x]) => `<line x1="${x}" y1="16" x2="${x}" y2="76"/>`).join("")}</g>
+    <line x1="12" y1="34" x2="108" y2="34" stroke="#B5784A" stroke-width="4"/>
+    ${contas.map(([x, c, ys]) => ys.map(y => `<ellipse cx="${x}" cy="${y}" rx="7" ry="4.5" fill="${c}"/>`).join("")).join("")}
+  </svg>`,
+  // Pessoas: crianças com coquinhos de cabelo
+  pess: `<svg viewBox="0 0 120 90" aria-hidden="true">
+    <path d="M24 90 Q26 64 42 61 Q58 64 60 90 Z" fill="#F2626B"/>
+    <path d="M36 62 L42 70 L48 62" fill="none" stroke="#F5C344" stroke-width="2.5" stroke-linejoin="round"/>
+    <circle cx="29" cy="28" r="6.5" fill="#3D4F4A"/><circle cx="55" cy="28" r="6.5" fill="#3D4F4A"/>
+    <circle cx="42" cy="44" r="16" fill="#FFE7D6"/>
+    <path d="M26 43 Q26 27 42 27 Q58 27 58 43 Q52 35 42 36 Q32 35 26 43 Z" fill="#3D4F4A"/>
+    <circle cx="36.5" cy="46" r="1.9" fill="#3D4F4A"/><circle cx="47.5" cy="46" r="1.9" fill="#3D4F4A"/>
+    <ellipse cx="33" cy="51" rx="3" ry="2" fill="#F7A1B5"/><ellipse cx="51" cy="51" rx="3" ry="2" fill="#F7A1B5"/>
+    <path d="M39 52 Q42 55 45 52" fill="none" stroke="#3D4F4A" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M62 90 Q64 66 80 63 Q96 66 98 90 Z" fill="#7CC9A5"/>
+    <path d="M74 64 L80 71 L86 64" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+    <circle cx="80" cy="26" r="6" fill="#3D4F4A"/>
+    <rect x="76" y="30" width="8" height="3" rx="1.5" fill="#E25563"/>
+    <circle cx="80" cy="47" r="15" fill="#FFE7D6"/>
+    <path d="M65 45 Q66 31 80 31 Q94 31 95 45 Q88 38 80 39 Q72 38 65 45 Z" fill="#3D4F4A"/>
+    <circle cx="75" cy="49" r="1.9" fill="#3D4F4A"/><circle cx="85" cy="49" r="1.9" fill="#3D4F4A"/>
+    <ellipse cx="71" cy="54" rx="3" ry="2" fill="#F7A1B5"/><ellipse cx="89" cy="54" rx="3" ry="2" fill="#F7A1B5"/>
+    <path d="M77 55 Q80 58 83 55" fill="none" stroke="#3D4F4A" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>`,
+  // Comida: tigela de lámen com hashi
+  com: `<svg viewBox="0 0 120 90" aria-hidden="true">
+    <g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".95">
+      <path d="M42 32 q-6 -7 0 -13 q6 -6 0 -12"/><path d="M58 30 q-6 -7 0 -13 q6 -6 0 -12"/><path d="M74 32 q-6 -7 0 -13 q6 -6 0 -12"/>
+    </g>
+    <ellipse cx="60" cy="44" rx="44" ry="9" fill="#F7D38B"/>
+    <g fill="none" stroke="#E8B85A" stroke-width="2">
+      <path d="M26 42 q6 4 12 0 t12 0 t12 0 t12 0 t12 0"/><path d="M30 47 q6 3 12 0 t12 0 t12 0 t12 0 t10 0"/>
+    </g>
+    <ellipse cx="46" cy="41" rx="8" ry="5" fill="#fff"/><circle cx="46" cy="41" r="3" fill="#F5B700"/>
+    <circle cx="66" cy="40" r="2" fill="#7CC9A5"/><circle cx="74" cy="44" r="2" fill="#7CC9A5"/><circle cx="60" cy="46" r="2" fill="#7CC9A5"/>
+    <path d="M16 44 Q18 78 60 80 Q102 78 104 44 Q100 53 60 53 Q20 53 16 44 Z" fill="#fff" stroke="#DDE8F5" stroke-width="1.5"/>
+    <path d="M24 60 Q60 70 96 60" fill="none" stroke="#6BA4D8" stroke-width="3"/>
+    <circle cx="40" cy="70" r="2" fill="#6BA4D8"/><circle cx="60" cy="73" r="2" fill="#6BA4D8"/><circle cx="80" cy="70" r="2" fill="#6BA4D8"/>
+    <rect x="46" y="79" width="28" height="6" rx="2" fill="#DDE8F5"/>
+    <line x1="72" y1="6" x2="94" y2="46" stroke="#B5784A" stroke-width="3" stroke-linecap="round"/>
+    <line x1="82" y1="4" x2="100" y2="44" stroke="#B5784A" stroke-width="3" stroke-linecap="round"/>
+  </svg>`,
+  // 守株待兔: coelho tonto ao lado do toco e o chapéu de palha do camponês
+  coelho: `<svg viewBox="0 0 320 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <rect width="320" height="120" fill="#E3F4EC"/>
+    <circle cx="262" cy="32" r="17" fill="#FFC2B5"/>
+    ${nuvem(40, 26)}${nuvem(190, 20, .8)}
+    <path d="M0 86 Q70 60 140 80 Q210 98 270 74 Q300 64 320 70 V120 H0 Z" fill="#BFE6CF"/>
+    <path d="M0 100 Q80 88 160 98 Q240 108 320 96 V120 H0 Z" fill="#8FD1AE"/>
+    <path d="M30 108 l8 -3 M60 112 l8 -3 M230 112 l8 -3 M270 108 l8 -3" stroke="#7CC2A0" stroke-width="2" stroke-linecap="round"/>
+    <path d="M146 101 L150 72 H172 L176 101 Z" fill="#B5784A"/>
+    <path d="M146 101 q-6 2 -9 6 M176 101 q6 2 9 6" stroke="#B5784A" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <ellipse cx="161" cy="72" rx="11" ry="4" fill="#E2B48A"/>
+    <ellipse cx="161" cy="72" rx="6" ry="2" fill="none" stroke="#C98B5B" stroke-width="1"/>
+    <ellipse cx="124" cy="98" rx="15" ry="10" fill="#fff"/>
+    <circle cx="110" cy="96" r="4.5" fill="#fff"/>
+    <ellipse cx="133" cy="74" rx="3.2" ry="10" fill="#fff" transform="rotate(-12 133 74)"/>
+    <ellipse cx="133" cy="74" rx="1.4" ry="7" fill="#F7A1B5" transform="rotate(-12 133 74)"/>
+    <ellipse cx="141" cy="75" rx="3.2" ry="10" fill="#fff" transform="rotate(14 141 75)"/>
+    <ellipse cx="141" cy="75" rx="1.4" ry="7" fill="#F7A1B5" transform="rotate(14 141 75)"/>
+    <circle cx="137" cy="89" r="8.5" fill="#fff"/>
+    <circle cx="140" cy="88" r="1.4" fill="#3D4F4A"/><circle cx="144.5" cy="91" r="1.2" fill="#F7A1B5"/>
+    <path d="M150 60 l2 4 4 1 -4 1 -2 4 -2 -4 -4 -1 4 -1 z" fill="#F5C344"/>
+    <path d="M122 62 l1.5 3 3 .8 -3 .8 -1.5 3 -1.5 -3 -3 -.8 3 -.8 z" fill="#F5C344"/>
+    <path d="M40 100 L64 84 L88 100 Z" fill="#F5C344"/>
+    <path d="M52 92 L64 84 L76 92" fill="none" stroke="#D9A21E" stroke-width="1.5"/>
+    <ellipse cx="64" cy="100" rx="25" ry="3" fill="#D9A21E" opacity=".5"/>
+  </svg>`,
+  // 塞翁失马: cavalo galopando em frente à Grande Muralha
+  cavalo: `<svg viewBox="0 0 320 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <rect width="320" height="120" fill="#FDF1E7"/>
+    <circle cx="64" cy="34" r="18" fill="#FFC2B5"/>
+    ${nuvem(120, 18, .9)}${nuvem(250, 26, .7)}
+    <path d="M0 78 L36 54 L64 70 L104 42 L142 70 L184 48 L222 72 L262 44 L320 70 V120 H0 Z" fill="#D7EADF"/>
+    <path d="M0 96 Q80 70 160 84 Q240 98 320 78 V120 H0 Z" fill="#A9D9BF"/>
+    <path d="M0 92 Q80 66 160 80 Q240 94 320 74" fill="none" stroke="#E8D3B5" stroke-width="7"/>
+    <path d="M0 87 Q80 61 160 75 Q240 89 320 69" fill="none" stroke="#E8D3B5" stroke-width="4" stroke-dasharray="5 4"/>
+    <rect x="222" y="70" width="18" height="18" fill="#E8D3B5"/>
+    <path d="M219 71 H243 L238 64 H224 Z" fill="#E25563"/>
+    <path d="M0 108 Q160 98 320 110 V120 H0 Z" fill="#8FD1AE"/>
+    <path d="M127 82 Q112 80 110 94" stroke="#7A4E31" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <g stroke="#C98B5B" stroke-width="4.5" stroke-linecap="round">
+      <line x1="136" y1="92" x2="124" y2="102"/><line x1="140" y1="93" x2="140" y2="106"/>
+      <line x1="166" y1="91" x2="180" y2="97"/><line x1="162" y1="93" x2="168" y2="106"/>
+    </g>
+    <ellipse cx="150" cy="86" rx="24" ry="10" fill="#C98B5B"/>
+    <path d="M162 82 L174 62 L184 66 L172 90 Z" fill="#C98B5B"/>
+    <ellipse cx="185" cy="64" rx="10" ry="5.5" fill="#C98B5B" transform="rotate(28 185 64)"/>
+    <path d="M176 57 L178 49 L182 57 Z" fill="#C98B5B"/>
+    <circle cx="185" cy="61.5" r="1.3" fill="#3D4F4A"/>
+    <path d="M163 82 Q167 68 176 59" stroke="#7A4E31" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </svg>`,
+  // 井底之蛙: sapo espiando do poço e a tartaruga do mar
+  sapo: `<svg viewBox="0 0 320 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <rect width="320" height="120" fill="#E6F3FA"/>
+    <circle cx="270" cy="30" r="15" fill="#FFC2B5"/>
+    ${nuvem(30, 24, .9)}${nuvem(190, 16, .8)}
+    <path d="M0 92 Q80 80 160 90 Q240 100 320 88 V120 H0 Z" fill="#8FD1AE"/>
+    <ellipse cx="130" cy="66" rx="42" ry="11" fill="#A8A39A"/>
+    <ellipse cx="130" cy="67" rx="34" ry="7.5" fill="#4E6B78"/>
+    <ellipse cx="130" cy="68" rx="14" ry="8" fill="#7CC9A5"/>
+    <circle cx="123" cy="61" r="5" fill="#7CC9A5"/><circle cx="137" cy="61" r="5" fill="#7CC9A5"/>
+    <circle cx="123" cy="60.5" r="2.8" fill="#fff"/><circle cx="137" cy="60.5" r="2.8" fill="#fff"/>
+    <circle cx="123.6" cy="60.8" r="1.4" fill="#3D4F4A"/><circle cx="137.6" cy="60.8" r="1.4" fill="#3D4F4A"/>
+    <path d="M124 67 Q130 71 136 67" fill="none" stroke="#3C8F74" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M88 66 V102 Q130 114 172 102 V66 Q130 80 88 66 Z" fill="#E3DCCF"/>
+    <g stroke="#C9BFAE" stroke-width="1.5" fill="none">
+      <path d="M88 78 Q130 92 172 78 M88 90 Q130 104 172 90"/><path d="M104 75 V86 M130 79 V91 M156 75 V86 M116 88 V99 M144 88 V99"/>
+    </g>
+    <path d="M88 66 Q130 80 172 66" fill="none" stroke="#C9BFAE" stroke-width="4" stroke-linecap="round"/>
+    <path d="M212 99 l-6 2" stroke="#A8DCC3" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="222" cy="102" rx="6" ry="3" fill="#A8DCC3"/><ellipse cx="254" cy="102" rx="6" ry="3" fill="#A8DCC3"/>
+    <path d="M214 100 Q238 72 262 100 Z" fill="#4FA88A"/>
+    <path d="M226 100 L232 88 H244 L250 100 M232 88 L238 80 L244 88" fill="none" stroke="#3C8F74" stroke-width="1.5"/>
+    <circle cx="268" cy="94" r="6" fill="#A8DCC3"/><circle cx="270" cy="92.5" r="1.2" fill="#3D4F4A"/>
+  </svg>`,
+  // Treino livre: 七巧板 (tangram), gongo e pergaminho
+  t_pares: `<svg viewBox="0 0 48 48" aria-hidden="true"><g stroke="#fff" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M4 4 H44 L24 24 Z" fill="#F2626B"/><path d="M4 4 L24 24 L4 44 Z" fill="#7CC9A5"/>
+    <path d="M44 4 V24 L34 14 Z" fill="#F5C344"/><path d="M34 14 L44 24 L34 34 L24 24 Z" fill="#8A7CF0"/>
+    <path d="M24 44 H44 V24 Z" fill="#6BA4D8"/><path d="M24 24 L34 34 H14 Z" fill="#FFB3A7"/>
+    <path d="M4 44 L14 34 H34 L24 44 Z" fill="#F7A1B5"/></g></svg>`,
+  t_falar: `<svg viewBox="0 0 48 48" aria-hidden="true">
+    <path d="M7 46 V7 H41 V46" fill="none" stroke="#B5784A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M4 7 H44" stroke="#E25563" stroke-width="4" stroke-linecap="round"/>
+    <path d="M18 7 L20 15 M30 7 L28 15" stroke="#B5784A" stroke-width="1.5"/>
+    <circle cx="24" cy="26" r="12" fill="#F5C344" stroke="#D9A21E" stroke-width="2"/>
+    <circle cx="24" cy="26" r="4.5" fill="#E8B32F"/>
+    <path d="M18.5 21 a7 7 0 0 1 6 -2.5" stroke="#fff" stroke-width="1.5" fill="none" opacity=".7" stroke-linecap="round"/>
+  </svg>`,
+  t_revisao: `<svg viewBox="0 0 48 48" aria-hidden="true">
+    <rect x="11" y="7" width="26" height="34" fill="#FFF8EC" stroke="#EAD9BF" stroke-width="1.5"/>
+    <rect x="7" y="4" width="34" height="5" rx="2.5" fill="#B5784A"/><rect x="7" y="39" width="34" height="5" rx="2.5" fill="#B5784A"/>
+    <g stroke="#7A938A" stroke-width="2" stroke-linecap="round"><path d="M31 13 V30 M24 13 V33 M17 13 V26"/></g>
+    <rect x="14" y="30" width="7" height="7" rx="1" fill="#E25563"/>
+  </svg>`
+};
+
+// Cena do topo: montanhas de Guilin, pagode e lanternas
+const CENA_HERO = `<svg viewBox="0 0 360 160" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+  <circle cx="200" cy="52" r="22" fill="#FFC2B5"/>
+  ${nuvem(128, 30)}${nuvem(286, 58, .7)}
+  <path d="M0 132 Q20 84 40 122 Q56 62 82 120 Q100 92 120 124 Q142 52 172 122 Q192 96 212 124 Q236 70 262 122 Q282 92 302 124 Q322 80 346 120 Q354 108 360 112 V160 H0 Z" fill="#CDEBDC"/>
+  <g fill="#F7C6D0"><rect x="252" y="110" width="18" height="22"/><rect x="254" y="94" width="14" height="12"/><rect x="256" y="80" width="10" height="10"/></g>
+  <g fill="#E25563">
+    <path d="M243 112 Q250 111 254 105 H268 Q272 111 279 112 Z"/>
+    <path d="M246 96 Q252 95 255 90 H267 Q270 95 276 96 Z"/>
+    <path d="M249 82 Q254 81 257 76 H265 Q268 81 273 82 Z"/>
+  </g>
+  <line x1="261" y1="76" x2="261" y2="66" stroke="#E25563" stroke-width="2"/>
+  <path d="M0 146 Q34 112 70 142 Q104 104 146 144 Q186 116 220 146 Q262 108 300 144 Q332 122 360 140 V160 H0 Z" fill="#A9D9BF"/>
+  ${lanterna(326, 0, .62)}${lanterna(350, 0, .5)}
+</svg>`;
 
 /* ================== ESTADO SALVO ================== */
 const CHAVE = "baoChines";
-let state = { xp: 0, streak: 0, ultimoDia: null, licoes: {}, mic: true, trOps: true };
+let state = { xp: 0, streak: 0, ultimoDia: null, licoes: {}, mic: true, trOps: true, erros: {} };
 try { Object.assign(state, JSON.parse(localStorage.getItem(CHAVE)) || {}); } catch (e) {}
 function salvar() { try { localStorage.setItem(CHAVE, JSON.stringify(state)); } catch (e) {} }
 
@@ -545,17 +1058,46 @@ function som(ok) {
 /* ================== RECONHECIMENTO DE VOZ ================== */
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 let rec = null, ouvindo = false;
+// Quando definido, o resultado da fala vai para ele (perguntas da história) em vez da lição
+let ouvinte = null;
+// Palavras curtas (uma sílaba) muitas vezes só geram resultado parcial, ou nenhum:
+// guardamos o parcial para usar no fim e avisamos quando nada foi ouvido.
+let parcial = null, teveFinal = false, teveErro = false;
+const MSG_SEM_FALA = "Não ouvi nada. Fale mais perto do microfone, um pouco mais alto. Palavra curta? Repita duas vezes (ex.: 三、三).";
+function entregarFala(res) { if (ouvinte) ouvinte.resultado(res); else resultadoFala(res); }
+function avisoFala(msg) {
+  if (ouvinte) { ouvinte.erro(msg); return; }
+  const r = document.querySelector(".mic-res"); if (!r) return;
+  r.className = "mic-res bad";
+  r.textContent = msg;
+}
 if (SR) {
   rec = new SR();
-  rec.lang = "zh-CN"; rec.interimResults = false; rec.maxAlternatives = 5;
-  rec.onstart = () => { ouvindo = true; const m = document.querySelector(".mic"); if (m) m.classList.add("ouvindo"); };
-  rec.onend = () => { ouvindo = false; const m = document.querySelector(".mic"); if (m) m.classList.remove("ouvindo"); };
-  rec.onresult = e => resultadoFala(e.results[0]);
+  rec.lang = "zh-CN"; rec.interimResults = true; rec.maxAlternatives = 5;
+  rec.onstart = () => {
+    ouvindo = true; parcial = null; teveFinal = false; teveErro = false;
+    const m = ouvinte ? ouvinte.botao : document.querySelector(".mic"); if (m) m.classList.add("ouvindo");
+  };
+  rec.onresult = e => {
+    const res = e.results[e.results.length - 1];
+    if (res.isFinal) { teveFinal = true; entregarFala(res); return; }
+    parcial = res;
+    const t = res[0] && res[0].transcript;
+    if (!t) return;
+    if (ouvinte) { if (ouvinte.parcial) ouvinte.parcial(t); }
+    else { const r = document.querySelector(".mic-res"); if (r) { r.className = "mic-res"; r.innerHTML = `Ouvindo: <span class="zh">${t}</span>…`; } }
+  };
+  rec.onend = () => {
+    ouvindo = false; document.querySelectorAll(".ouvindo").forEach(m => m.classList.remove("ouvindo"));
+    if (teveFinal || teveErro) return;
+    if (parcial) { teveFinal = true; entregarFala(parcial); }
+    else avisoFala(MSG_SEM_FALA);
+  };
   rec.onerror = e => {
-    const r = document.querySelector(".mic-res"); if (!r) return;
-    r.className = "mic-res bad";
-    r.textContent = e.error === "not-allowed" ? "Permita o microfone no navegador." :
-                    e.error === "no-speech" ? "Não ouvi nada. Tenta de novo!" : "Erro no microfone: " + e.error;
+    teveErro = true;
+    if (e.error === "aborted") return;
+    avisoFala(e.error === "not-allowed" ? "Permita o microfone no navegador." :
+              e.error === "no-speech" ? MSG_SEM_FALA : "Erro no microfone: " + e.error);
   };
 }
 const micDisponivel = () => !!SR && state.mic;
@@ -570,6 +1112,39 @@ function semelhanca(a, b) {
   return dp[m][n] / Math.max(m, n);
 }
 
+// Resposta livre (história): cada item de "chaves" tem alternativas separadas por "|";
+// as com hanzi são procuradas no texto em chinês, as outras no pinyin sem tons.
+const temHanzi = s => /[一-鿿]/.test(s);
+const soLetras = s => semTom(s).replace(/v/g, "u").replace(/[^a-z]/g, "");
+function confereResposta(texto, chaves) {
+  const zh = limparZh(texto), py = soLetras(texto);
+  if (!zh && !py) return false;
+  return chaves.every(ch => ch.split("|").some(alt => temHanzi(alt) ? zh.includes(alt) : py.includes(soLetras(alt))));
+}
+function dicaDe(chaves) {
+  const alts = chaves[0].split("|");
+  const zh = alts.find(temHanzi), py = alts.find(a => !temHanzi(a));
+  return `<span class="zh">${zh}</span>${py ? ` (${py})` : ""}`;
+}
+
+/* ================== PALAVRAS DIFÍCEIS ================== */
+// state.erros guarda quantas vezes cada palavra (pelo hanzi) foi errada; acertar de primeira diminui.
+function marcarErro(it) { if (!it || !it.h) return; state.erros[it.h] = (state.erros[it.h] || 0) + 1; salvar(); }
+function marcarAcerto(it) {
+  if (!it || !state.erros[it.h]) return;
+  if (--state.erros[it.h] <= 0) delete state.erros[it.h];
+  salvar();
+}
+function palavrasDificeis() {
+  return Object.entries(state.erros).sort((a, b) => b[1] - a[1])
+    .map(([h]) => VOCAB.find(v => v.h === h)).filter(Boolean);
+}
+function iniciarRevisao() {
+  const dif = palavrasDificeis().slice(0, 6);
+  const resto = embaralhar(VOCAB.filter(v => !dif.includes(v)));
+  iniciarLicao(dif.concat(resto).slice(0, 6), "misto");
+}
+
 /* ================== HOME ================== */
 const frasesHero = ["Bora treinar hoje?", "Um pouquinho por dia já faz diferença!", "Vamos treinar esses tons?", "Pronto pra mais XP?"];
 function renderHome() {
@@ -579,33 +1154,38 @@ function renderHome() {
   $("tileFalar").disabled = !micDisponivel();
   $("avisoMic").textContent = !SR ? "Para os exercícios de fala, abra no Google Chrome." :
                               !state.mic ? "Exercícios de fala desligados. Toque no 🎤 lá em cima para ligar." : "";
-  $("frase-hero").textContent = frasesHero[Math.floor(Math.random() * frasesHero.length)];
+  const nDif = palavrasDificeis().length;
+  $("frase-hero").textContent = nDif && Math.random() < 0.5
+    ? `Tem ${nDif} palavra${nDif > 1 ? "s" : ""} esperando na Revisão 🔁`
+    : frasesHero[Math.floor(Math.random() * frasesHero.length)];
+  $("revBadge").textContent = nDif;
+  $("revBadge").classList.toggle("hidden", !nDif);
 
   $("unidades").innerHTML = UNIDADES.map(u => {
     const feitas = state.licoes[u.id] || 0;
     const pct = Math.min(feitas, LICOES_POR_UNIDADE) / LICOES_POR_UNIDADE * 100;
-    const coroa = feitas >= LICOES_POR_UNIDADE ? '<span class="u-coroa">👑</span>' : "";
-    return `<button class="unidade" data-u="${u.id}">
-      <div class="u-emoji" style="--u:${u.cor}">${u.emoji}</div>
-      <div class="u-info">
-        <div class="u-nome">${u.nome}</div>
-        <div class="u-sub">${u.itens.length} palavras · ${Math.min(feitas, LICOES_POR_UNIDADE)}/${LICOES_POR_UNIDADE} lições</div>
+    const coroa = feitas >= LICOES_POR_UNIDADE ? '<span class="b-coroa">👑</span>' : "";
+    return `<button class="bloco" data-u="${u.id}" style="--u:${u.cor}">
+      <div class="b-arte">${ARTE[u.id]}<span class="b-selo" title="${u.zhp}">${u.zh}</span></div>
+      <div class="b-info">
+        <div class="b-nome">${u.nome}</div>
+        <div class="b-sub">${u.itens.length} palavras · ${Math.min(feitas, LICOES_POR_UNIDADE)}/${LICOES_POR_UNIDADE} lições</div>
         <div class="u-bar"><div style="width:${pct}%"></div></div>
       </div>${coroa}</button>`;
   }).join("");
-  document.querySelectorAll(".unidade[data-u]").forEach(b => b.onclick = () => {
+  document.querySelectorAll(".bloco[data-u]").forEach(b => b.onclick = () => {
     const u = UNIDADES.find(x => x.id === b.dataset.u);
     iniciarLicao(u.itens, "misto", u.id);
   });
 
   const feitasH = state.historias || {};
-  $("historias").innerHTML = HISTORIAS.map(h => `<button class="unidade h-card" data-h="${h.id}">
-      <div class="u-emoji">${h.emoji}</div>
-      <div class="u-info">
-        <div class="u-nome"><span class="zh">${h.titulo}</span> · ${h.pt}</div>
-        <div class="u-sub" style="margin-bottom:0">${h.frases.length} frases · desafio de ${h.perguntas.length} perguntas</div>
-      </div>${feitasH[h.id] ? '<span class="u-coroa">✅</span>' : ""}</button>`).join("");
-  document.querySelectorAll(".unidade[data-h]").forEach(b => b.onclick = () =>
+  $("historias").innerHTML = HISTORIAS.map(h => `<button class="bloco h-bloco" data-h="${h.id}">
+      <div class="b-arte larga">${ARTE[h.id]}</div>
+      <div class="b-info">
+        <div class="b-nome"><span class="cali h-tit">${h.titulo}</span>${h.pt}</div>
+        <div class="b-sub">${h.partes.length} partes · responda em chinês + desafio</div>
+      </div>${feitasH[h.id] ? '<span class="b-coroa">✅</span>' : ""}</button>`).join("");
+  document.querySelectorAll(".bloco[data-h]").forEach(b => b.onclick = () =>
     abrirHistoria(HISTORIAS.find(x => x.id === b.dataset.h)));
 }
 $("btnMic").onclick = () => {
@@ -616,7 +1196,7 @@ document.querySelectorAll(".tile").forEach(t => t.onclick = () => {
   const m = t.dataset.modo;
   if (m === "pares") iniciarLicao(VOCAB, "pares");
   else if (m === "falar") iniciarLicao(VOCAB, "falar");
-  else iniciarLicao(VOCAB, "misto");
+  else iniciarRevisao();
 });
 
 /* ================== LIÇÃO ================== */
@@ -672,7 +1252,7 @@ function renderExercicio() {
   if (ex.tipo === "escolha") {
     const ops = opcoesPara(it);
     area.innerHTML = `<div class="instr">O que significa?</div>
-      <div class="prompt"><div class="mini">🐼</div>
+      <div class="prompt"><div class="mini">${panda()}</div>
         <div class="bubble"><button class="spk" data-fala>🔊</button>
           <div><div class="zh big">${it.h}</div><div class="py">${it.p}</div></div></div></div>
       <div class="opts">${ops.map((o, i) => `<button class="opt" data-i="${i}">${o.pt}</button>`).join("")}</div>`;
@@ -681,7 +1261,7 @@ function renderExercicio() {
   else if (ex.tipo === "reverso") {
     const ops = opcoesPara(it);
     area.innerHTML = `<div class="instr">Como se diz em chinês?</div>
-      <div class="prompt"><div class="mini">🐼</div><div class="bubble"><div class="pt-grande">“${it.pt}”</div></div></div>
+      <div class="prompt"><div class="mini">${panda()}</div><div class="bubble"><div class="pt-grande">“${it.pt}”</div></div></div>
       <div class="opts duas">${ops.map((o, i) => `<button class="opt" data-i="${i}"><span class="zh">${o.h}</span><small>${o.p}</small></button>`).join("")}</div>`;
     ex.opcoes = ops;
   }
@@ -700,7 +1280,7 @@ function renderExercicio() {
     const ops = embaralhar(ex.opcoesBase);
     const comPy = ops.every(o => o.p);
     area.innerHTML = `<div class="instr">Desafio da história</div>
-      <div class="prompt"><div class="mini">🐼</div>
+      <div class="prompt"><div class="mini">${panda()}</div>
         <div class="bubble"><button class="spk" data-fala>🔊</button>
           <div><div class="zh big-q">${q.h}</div><div class="py">${q.p}</div>
           <button class="ver-tr">ver tradução</button><div class="q-tr hidden">${q.pt}</div></div></div></div>
@@ -716,15 +1296,16 @@ function renderExercicio() {
   }
   else if (ex.tipo === "falar") {
     area.innerHTML = `<div class="instr">Fale em voz alta</div>
-      <div class="prompt"><div class="mini">🐼</div>
+      <div class="prompt"><div class="mini">${panda()}</div>
         <div class="bubble"><button class="spk" data-fala>🔊</button><button class="spk lento" data-fala-lento>🐢</button>
           <div><div class="zh big">${it.h}</div><div class="py">${it.p}</div><div class="py">${it.pt}</div></div></div></div>
-      <div class="mic-area"><button class="mic">🎤</button><div class="mic-dica">Toque e fale</div><div class="mic-res"></div></div>`;
+      <div class="mic-area"><button class="mic">🎤</button><div class="mic-dica">Toque e fale${limparZh(it.h).length <= 1 ? `<br><small>Palavra curta: fale devagar ou repita duas vezes (<span class="zh">${it.h}、${it.h}</span>)</small>` : ""}</div><div class="mic-res"></div></div>`;
     $("btnCheck").classList.add("hidden");
     $("btnPular").classList.remove("hidden");
     document.querySelector(".mic").onclick = () => {
       if (!rec || ouvindo) return;
       speechSynthesis.cancel();
+      ouvinte = null;
       document.querySelector(".mic-res").textContent = "";
       try { rec.start(); } catch (e) {}
     };
@@ -786,6 +1367,7 @@ function renderPares(ex) {
         }
       } else {
         som(false); erros++;
+        marcarErro(itens[+a.dataset.k]);
         [a, d].forEach(x => { x.classList.add("errado"); setTimeout(() => x.classList.remove("errado"), 450); });
       }
     }
@@ -804,6 +1386,7 @@ function verificar() {
     else if (i === selecionado) b.classList.add("errado");
   });
   resultadoAtual = { ok };
+  if (ex.tipo !== "pergunta") { if (!ok) marcarErro(ex.item); else if (!ex.errou) marcarAcerto(ex.item); }
   if (ok && !ex.errou) { xpLicao += 10; acertosPrimeira++; }
   if (!ok) ex.errou = true;
   const resposta = ex.tipo === "pergunta"
@@ -821,7 +1404,8 @@ function resultadoFala(resultados) {
   for (const alt of resultados) {
     const t = limparZh(alt.transcript);
     for (const alvo of alvos) {
-      const s = semelhanca(t, alvo);
+      // conter a palavra também vale (ex.: "三三" ou "三个" para 三)
+      const s = t.includes(alvo) ? 1 : semelhanca(t, alvo);
       if (s > nota) { nota = s; melhor = t; }
     }
   }
@@ -833,6 +1417,7 @@ function resultadoFala(resultados) {
     mostrarFeedback(true, `Pronúncia ${pct}%! 🎤`, `Entendi: <span class="zh">${melhor}</span>`);
   } else {
     som(false); ex.errou = true;
+    reagir(document.querySelector("#area .mini"), false);
     const r = document.querySelector(".mic-res");
     r.className = "mic-res bad";
     r.innerHTML = `Entendi: <span class="zh">${melhor || "…"}</span> (${pct}%). Ouça e tente de novo!`;
@@ -841,6 +1426,7 @@ function resultadoFala(resultados) {
 
 function mostrarFeedback(ok, titulo, texto) {
   som(ok);
+  reagir(document.querySelector("#area .mini"), ok);
   $("fbTitulo").textContent = titulo;
   $("fbTexto").innerHTML = texto;
   $("feedback").className = "feedback show " + (ok ? "ok" : "bad");
@@ -884,42 +1470,156 @@ function falarSequencia(textos, aoMudar) {
   });
 }
 
+function htmlPergunta(q, pi, ultima) {
+  return `<div class="h-perg" data-p="${pi}">
+    <div class="hp-top"><span class="mini-p">${panda()}</span> Pergunta do Bao</div>
+    <div class="hp-q"><button class="spk sm hp-ouvir" title="Ouvir a pergunta">🔊</button>
+      <div><div class="zh hp-zh">${q.h}</div><div class="py hp-py">${q.p}</div><div class="hp-tr">${q.pt}</div></div></div>
+    <div class="hp-resp">
+      <input class="hp-input" type="text" placeholder="Responda em chinês…" autocomplete="off" autocapitalize="off" spellcheck="false">
+      ${micDisponivel() ? `<button class="hp-mic" title="Responder falando">🎤</button>` : ""}
+    </div>
+    <p class="hp-dica">Vale escrever em pinyin sem acento (ex.: <i>wo hen hao</i>), em 汉字${micDisponivel() ? " ou falar no 🎤" : ""}.</p>
+    <div class="hp-acoes">
+      <button class="btn small hp-enviar" disabled>Responder</button>
+      <button class="hp-link hp-btr">👀 Ver tradução</button>
+      <button class="hp-link hp-bres">💡 Mostrar resposta</button>
+    </div>
+    <div class="hp-fb"></div>
+    <div class="hp-modelo">
+      <div class="hm-tit">Uma resposta possível</div>
+      <div class="hm-linha"><button class="spk sm hm-ouvir" title="Ouvir a resposta">🔊</button>
+        <div><div class="zh hm-zh">${q.r.h}</div><div class="py hm-py">${q.r.p}</div><div class="hp-tr">${q.r.pt}</div></div></div>
+    </div>
+    <button class="btn full hp-seguir">${ultima ? "Ver o final ▶" : "Continuar a história ▶"}</button>
+  </div>`;
+}
+
+function ligarPergunta(card, q, aoSeguir) {
+  const inp = card.querySelector(".hp-input"), env = card.querySelector(".hp-enviar");
+  const fb = card.querySelector(".hp-fb"), mic = card.querySelector(".hp-mic"), btr = card.querySelector(".hp-btr");
+  let tentativas = 0, resolvida = false;
+
+  const responder = (texto, alternativas = [texto]) => {
+    if (resolvida || !texto.trim()) return;
+    const certo = alternativas.find(t => confereResposta(t, q.k));
+    if (certo !== undefined) {
+      resolvida = true;
+      inp.value = certo; inp.disabled = true; env.disabled = true;
+      const ganhou = tentativas === 0 && !card.classList.contains("revelada");
+      if (ganhou) { state.xp += 5; atualizarStreak(); salvar(); }
+      fb.className = "hp-fb ok";
+      fb.innerHTML = `很好！ Acertou!${ganhou ? " +5 XP ⭐" : ""}`;
+      card.classList.add("revelada");
+      reagir(card.querySelector(".mini-p"), true);
+      som(true);
+    } else {
+      tentativas++;
+      fb.className = "hp-fb bad";
+      fb.innerHTML = tentativas >= 2
+        ? `Quase! Dica: a resposta usa ${dicaDe(q.k)}. Ou toque em 💡 para ver.`
+        : "Hmm, não é bem isso. Releia o trecho e tenta de novo!";
+      card.classList.remove("treme"); void card.offsetWidth; card.classList.add("treme");
+      reagir(card.querySelector(".mini-p"), false);
+      som(false);
+    }
+  };
+
+  inp.oninput = () => { env.disabled = !inp.value.trim(); };
+  inp.onkeydown = e => { if (e.key === "Enter") responder(inp.value); };
+  env.onclick = () => responder(inp.value);
+  card.querySelector(".hp-ouvir").onclick = () => falar(q.h);
+  card.querySelector(".hm-ouvir").onclick = () => falar(q.r.h);
+  btr.onclick = () => {
+    const on = card.classList.toggle("com-tr");
+    btr.textContent = on ? "🙈 Esconder tradução" : "👀 Ver tradução";
+  };
+  card.querySelector(".hp-bres").onclick = () => {
+    card.classList.add("revelada");
+    if (!resolvida) { fb.className = "hp-fb"; fb.textContent = "Leia a resposta em voz alta pra fixar 🙂"; }
+    falar(q.r.h);
+  };
+  card.querySelector(".hp-seguir").onclick = () => { card.classList.add("seguiu"); aoSeguir(); };
+  if (mic) mic.onclick = () => {
+    if (!rec || ouvindo || resolvida) return;
+    speechSynthesis.cancel();
+    fb.className = "hp-fb"; fb.textContent = "Ouvindo… fale sua resposta em chinês.";
+    ouvinte = {
+      botao: mic,
+      resultado: res => {
+        const alts = Array.from(res, a => a.transcript);
+        inp.value = alts[0] || ""; env.disabled = !inp.value.trim();
+        if (inp.value) responder(alts[0], alts);
+        else { fb.className = "hp-fb bad"; fb.textContent = "Não entendi. Tenta de novo!"; }
+      },
+      parcial: t => { fb.className = "hp-fb"; fb.innerHTML = `Ouvindo: <span class="zh">${t}</span>…`; },
+      erro: msg => { fb.className = "hp-fb bad"; fb.textContent = msg; }
+    };
+    try { rec.start(); } catch (e) {}
+  };
+}
+
 function abrirHistoria(h) {
   const textoFrase = f => f.t.map(tk => typeof tk === "string" ? tk : tk[0]).join("");
+  const frases = h.partes.flatMap(p => p.frases);
+  const jaFez = !!(state.historias || {})[h.id];
+  let g = 0; // índice global da frase, para áudio e significado das palavras
+  const htmlFrase = f => { const i = g++; return `<div class="h-frase" data-i="${i}">
+      <button class="spk sm" data-f="${i}">🔊</button>
+      <div class="h-corpo"><div class="h-linha">${f.t.map((tk, j) => typeof tk === "string"
+        ? `<span class="pont zh">${tk}</span>`
+        : `<button class="palavra" data-f="${i}" data-j="${j}"><ruby class="zh">${tk[0]}<rt>${tk[1]}</rt></ruby></button>`).join("")}</div>
+      <div class="h-trad">${f.pt}</div></div></div>`; };
+  const ultima = h.partes.length - 1;
+
   $("hConteudo").innerHTML = `
-    <div class="h-capa"><div class="h-emoji">${h.emoji}</div>
-      <div><div class="zh h-zh">${h.titulo}</div><div class="py">${h.py}</div>
+    <div class="h-capa"><div class="h-banner">${ARTE[h.id]}</div>
+      <div class="h-capa-txt"><div class="cali h-zh">${h.titulo}</div><div class="py">${h.py}</div>
       <div class="h-pt">${h.pt}</div><div class="h-epoca">${h.epoca}</div></div></div>
     <div class="h-contexto">${h.contexto}</div>
     <div class="h-ctrl">
       <label class="chip"><input type="checkbox" id="hPy" checked> Pinyin</label>
       <label class="chip"><input type="checkbox" id="hTr"> Tradução</label>
-      <button class="btn small" id="hTudo">▶ Ouvir tudo</button>
+      <button class="btn small" id="hTudo">▶ Ouvir</button>
     </div>
-    <p class="h-dica">Tente ler sozinho primeiro. Toque em qualquer palavra para ouvir e ver o significado.</p>
-    <div id="hFrases">${h.frases.map((f, i) => `<div class="h-frase" data-i="${i}">
-      <button class="spk sm" data-f="${i}">🔊</button>
-      <div class="h-corpo"><div class="h-linha">${f.t.map((tk, j) => typeof tk === "string"
-        ? `<span class="pont zh">${tk}</span>`
-        : `<button class="palavra" data-f="${i}" data-j="${j}"><ruby class="zh">${tk[0]}<rt>${tk[1]}</rt></ruby></button>`).join("")}</div>
-      <div class="h-trad">${f.pt}</div></div></div>`).join("")}</div>
-    <div class="h-moral"><b>Moral da história:</b> ${h.moral}</div>
-    <button class="btn full" id="hDesafio">🏆 Fazer o desafio</button>`;
+    <p class="h-dica">Leia um trecho e responda a pergunta do Bao em chinês. Toque em qualquer palavra para ouvir e ver o significado.</p>
+    <div id="hPartes">${h.partes.map((p, pi) => `<div class="h-parte ${pi > 0 && !jaFez ? "hidden" : ""}" data-p="${pi}">
+        <div class="h-parte-tit">Parte ${pi + 1} de ${h.partes.length}</div>
+        ${p.frases.map(htmlFrase).join("")}
+        ${htmlPergunta(p.q, pi, pi === ultima)}
+      </div>`).join("")}</div>
+    <div id="hFinal" class="${jaFez ? "" : "hidden"}">
+      <div class="h-moral"><b>Moral da história:</b> ${h.moral}</div>
+      <button class="btn full" id="hDesafio">🏆 Fazer o desafio</button>
+    </div>`;
 
-  const box = $("hFrases");
+  const box = $("hPartes");
   $("hPy").onchange = e => box.classList.toggle("sem-py", !e.target.checked);
   $("hTr").onchange = e => box.classList.toggle("com-tr", e.target.checked);
 
   const marcar = i => box.querySelectorAll(".h-frase").forEach((el, k) => el.classList.toggle("tocando", k === i));
-  $("hTudo").onclick = () => falarSequencia(h.frases.map(textoFrase), marcar);
+  // "Ouvir" lê só as partes já liberadas (elas sempre são as primeiras)
+  $("hTudo").onclick = () => {
+    const n = box.querySelectorAll(".h-parte:not(.hidden) .h-frase").length;
+    falarSequencia(frases.slice(0, n).map(textoFrase), marcar);
+  };
   box.querySelectorAll("[data-f].spk").forEach(b => b.onclick = () => {
-    const i = +b.dataset.f; falarSequencia([textoFrase(h.frases[i])], k => marcar(k === -1 ? -1 : i));
+    const i = +b.dataset.f; falarSequencia([textoFrase(frases[i])], k => marcar(k === -1 ? -1 : i));
+  });
+
+  box.querySelectorAll(".h-perg").forEach(card => {
+    const pi = +card.dataset.p;
+    ligarPergunta(card, h.partes[pi].q, () => {
+      const alvo = box.querySelector(`.h-parte[data-p="${pi + 1}"]`) || $("hFinal");
+      alvo.classList.remove("hidden");
+      alvo.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   });
 
   const info = $("wordInfo");
   box.querySelectorAll(".palavra").forEach(b => b.onclick = ev => {
     ev.stopPropagation();
-    const [hz, py, sig] = h.frases[+b.dataset.f].t[+b.dataset.j];
+    const [hz, py, sig] = frases[+b.dataset.f].t[+b.dataset.j];
     box.querySelectorAll(".palavra.ativa").forEach(x => x.classList.remove("ativa"));
     b.classList.add("ativa");
     falar(hz, true);
@@ -951,7 +1651,12 @@ function iniciarLicaoComFila(novaFila) {
   renderExercicio();
 }
 
-$("btnVoltarH").onclick = () => { speechSynthesis.cancel(); renderHome(); mostrarTela("home"); };
+$("btnVoltarH").onclick = () => {
+  speechSynthesis.cancel();
+  if (ouvindo && rec) rec.abort();
+  ouvinte = null;
+  renderHome(); mostrarTela("home");
+};
 document.addEventListener("click", e => {
   const info = $("wordInfo");
   if (info.classList.contains("show") && !info.contains(e.target)) {
@@ -971,6 +1676,10 @@ document.addEventListener("keydown", e => {
   else if (!$("btnCheck").disabled) verificar();
 });
 
+// Desenhos fixos da página: cena do topo, Bao e ícones do treino livre
+$("heroCena").innerHTML = CENA_HERO;
+document.querySelectorAll("[data-panda]").forEach(el => el.innerHTML = panda());
+document.querySelectorAll(".tile[data-modo]").forEach(t => t.insertAdjacentHTML("afterbegin", ARTE["t_" + t.dataset.modo]));
 renderHome();
 </script>
 </body>
